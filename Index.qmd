@@ -87,34 +87,19 @@ A continuación se presentan las librerias requeridas y la base de datos con las
 ```{r}
 #| message: false
 #| warning: false
-library(ppcor)
-library(car)
-library(lmtest)
-library(foreign)
-library(dplyr)
-library(skedastic)
-library(performance)
-library(nortest)
-library(glmnet)
-library(GGally)
-library(betareg)
-library(ade4)
-library(spdep) 
-library(RANN)
-library(sp) 
-library(sf)
-library(tripack) 
-library(RColorBrewer)
-library(epitools) 
-library(DCluster)
-library(MASS)
-library(R2WinBUGS)
-library(dispmod)
-library(SpatialPack)
-library(nlme)
-library(mgcv)
-library(CARBayes)
-library(dbscan)
+library(ppcor);library(car);library(lmtest)
+library(foreign);library(dplyr);library(skedastic)
+library(performance);library(nortest);library(glmnet)
+library(GGally);library(betareg);library(ade4)
+library(spdep) ;library(RANN);library(sp) 
+library(sf);library(tripack);library(RColorBrewer)
+library(epitools);library(DCluster);library(MASS)
+library(R2WinBUGS);library(dispmod);library(SpatialPack)
+library(nlme);library(mgcv);library(CARBayes)
+library(dbscan);library(mapview);library(spatialreg)
+library(GISTools);library(psych);library(FactoClass)
+library(GWmodel);library(viridis);library(mapsRinteractive)
+library(ggspatial)
 ```
 
 **Base de datos modificada**
@@ -138,6 +123,39 @@ datos2 = datos %>% dplyr::select(-c(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrt
 
 datosmod1 = datos1[-c(1:5)]
 datosmod2 = datos2[-c(1:5)]
+```
+
+Agregado a esto se realiza un mapa de los datos observados, para lo que se necesita realizar la carga del *.shp* y la definición de las coordenadas. De modo que:
+
+```{r}
+#| message: false
+#| warning: false
+#| results: hide
+ComChicago = sf::read_sf("C:/Users/laura/Downloads/comarea/ComArea_ACS14_f.shp")
+ComChicago = st_transform(ComChicago,CRS("+init=epsg:21897"))
+
+ComChicago$HISaveP <- ComChicago$HISave/100
+
+datos$X = st_coordinates(st_centroid(ComChicago))[,1] 
+datos$Y = st_coordinates(st_centroid(ComChicago))[,2]
+
+coords = st_coordinates(st_centroid(ComChicago))
+```
+
+```{r}
+ggplot(ComChicago) +
+  geom_sf(aes(fill = HISave)) +
+  
+  scale_fill_viridis_c(option='plasma') +  
+  labs(fill = "Valores Locales") +
+  theme_minimal() +
+  ggtitle("Índice de Privación Económica promedio en Chicago (2014)") +
+  
+  theme(legend.position = "right") +
+  
+  annotation_scale(location = "bl", width_hint = 0.15) +
+  annotation_north_arrow(location = "tr", which_north = "true", 
+                         height = unit(1, "cm"), width = unit(1, "cm"))
 ```
 
 ## Selección de variables
@@ -208,9 +226,9 @@ Para cada uno de los conjuntos de variables elegidas se realizará un *pairplot*
 ### Stepwise forward
 
 ```{r}
-df1 = datosmod2 %>% dplyr::select(c(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, AI14P, 
-                                    Pov125P, Pov185P, AS14P, Under18P, Over65P, 
-                                    PopChng))
+df1 = datosmod2 %>% dplyr::select(c(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, 
+                                    AI14P,Pov125P, Pov185P, AS14P, Under18P, 
+                                    Over65P, PopChng))
 ```
 
 Con respecto al pairplot se detectan algunas correlaciones altas $(> 0.7)$ entre las que se encuentran:
@@ -385,25 +403,12 @@ $$
 
 Para encontrar la matriz de pesos espaciales $W$, se hizo uso del indice de moran. De esta forma el procedimiento correspondia a:
 
-1.  Subir el .*shp* de los datos y realizar las modificaciones necesarias.
+1.  Determinar y gráficar los centroides y coordenadas.
 
     ```{r}
     #| message: false
     #| warning: false
     #| results: hide
-    ComChicago = sf::read_sf("C:/Users/laura/Downloads/comarea/ComArea_ACS14_f.shp")
-    ComChicago = st_transform(ComChicago,CRS("+init=epsg:21897"))
-
-    ComChicago$HISaveP <- ComChicago$HISave/100
-    ```
-
-2.  Determinar y gráficar los centroides y coordenadas.
-
-    ```{r}
-    #| message: false
-    #| warning: false
-    #| results: hide
-    coords <- st_coordinates(st_centroid(ComChicago))
     xy0 = coords
     trinb=tri2nb(xy0)
     ```
@@ -420,7 +425,7 @@ Para encontrar la matriz de pesos espaciales $W$, se hizo uso del indice de mora
     grid()
     ```
 
-3.  Calcular la matriz $W$ por distintos criterios (Torre, Reina, Vecinos) para la variable de interés.
+2.  Calcular la matriz $W$ por distintos criterios (Torre, Reina, Vecinos) para la variable de interés.
 
     ```{r}
     #| message: false
@@ -500,7 +505,7 @@ Para encontrar la matriz de pesos espaciales $W$, se hizo uso del indice de mora
     plot(relative_nb_b,xy0,add=T,col="yellow")
     ```
 
-4.  Realizar la prueba de Moran y seleccionar la de menor $valor-p$.
+3.  Realizar la prueba de Moran y seleccionar la de menor $valor-p$.
 
     ```{r}
     #| message: false
