@@ -536,3 +536,25 @@ De modo que la matriz $W$ con menor $valor-p$ es:
 cat("La matriz W seleccionada es", names(mat)[which.min(aux)], 
     "con un pvalor de", IMtest$p.value)
 ```
+
+Y de esta forma:
+
+```{r}
+par(mfrow=c(1,1))
+moran.plot(datos$HISaveP, 
+           mat[[which.min(aux)]], 
+           labels=as.character(datos$community), 
+           xlab="IPE promedio", 
+           ylab="IPE promedio rezagado", 
+           las=1, 
+           pch=16, 
+           cex=0.5)
+
+legend("bottomright", 
+       legend=c("Valor P: 1.771052e-15"), 
+       cex=1,
+       bg='lightgreen')
+
+title("Dispersograma de Moran para el Índice de Privación Económica promedio
+      en Chicago (2014)", cex.main=1)
+```
