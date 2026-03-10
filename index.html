@@ -457,15 +457,16 @@ window.Quarto = {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                   PopMP, PopFP, Under5, Under18, Over18, Over21, </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                   Over65, Wht14,Blk14, AI14, AS14, NHP14, </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                   Oth14,Hisp14, Pov50, Pov125, Pov150,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                   Pov185, Pov200, field_37, Pop2012))</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>datos2 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, field_37, Pop2012))</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>datosmod1 <span class="ot">=</span> datos1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>datosmod2 <span class="ot">=</span> datos2[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                   Pov185, Pov200, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                   field_37, Pop2012))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>datos2 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, field_37, Pop2012))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>datosmod1 <span class="ot">=</span> datos1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>datosmod2 <span class="ot">=</span> datos2[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="selección-de-variables" class="level2">
 <h2 class="anchored" data-anchor-id="selección-de-variables">Selección de variables</h2>
@@ -626,7 +627,8 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="stepwise-forward-1" class="level3">
 <h3 class="anchored" data-anchor-id="stepwise-forward-1">Stepwise forward</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> datosmod2 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, AI14P, Pov125P, Pov185P, AS14P, Under18P, Over65P, PopChng))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> datosmod2 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, AI14P, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                    Pov125P, Pov185P, AS14P, Under18P, Over65P, PopChng))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Con respecto al pairplot se detectan algunas correlaciones altas <span class="math inline">\((&gt; 0.7)\)</span> entre las que se encuentran:</p>
 <ul>
@@ -663,7 +665,8 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h3 class="anchored" data-anchor-id="regularización-lasso-1">Regularización Lasso</h3>
 <p><em>Para el lambda mínimo:</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng, Under18P, Over65P, Wht14P, AI14P, AS14P, Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, Pov200P, COIave, Hlitave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng, Under18P, Over65P, Wht14P, AI14P, AS14P, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                    Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, Pov200P, COIave, Hlitave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Con respecto al pairplot, al igual que en el caso anterior, se observan valores altos en la correlación. En estos se encuentran:</p>
 <ul>
@@ -695,7 +698,8 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p><em>Para el lambda a una desviacion estándar:</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng, Under18P, AI14P, Oth14P, NoHS14, ClgGrad14, Pov200P, COIave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng, Under18P, AI14P, Oth14P, NoHS14,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                                    ClgGrad14, Pov200P, COIave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Con respecto al pairplot se detectan las siguientes correlaciones altas:</p>
 <ul>
@@ -815,7 +819,7 @@ D = 0.074795, p-value = 0.3566</code></pre>
 </div>
 <p>Por consiguiente, al cumplirse los supuestos de normalidad y homocedasticidad hacemos la re evaluación de la significancia de los coeficientes, haciendo el re ajuste del modelo, obteniendo de este modo el siguiente modelo final.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mod.beta1 <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> PopChng <span class="sc">+</span> ClgGrad14 <span class="sc">+</span> Pov200P <span class="sc">+</span> COIave                  </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mod.beta1 <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> PopChng <span class="sc">+</span> ClgGrad14 <span class="sc">+</span> Pov200P <span class="sc">+</span> COIave</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                             , <span class="at">data =</span> datosmod1) </span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod.beta1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -908,12 +912,12 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 </div>
 </div>
 <p>Por lo tanto podemos observar que el modelo auxiliar definitivo corresponde a:</p>
-<p><span class="math display">\[
-Y_i \sim Beta(\mu_i, \phi)
+<p>{<span class="math display">\[
+Y_i \sim Beta(\mu_i,\phi)
 \]</span></p>
 <p><span class="math display">\[
-logit(\mu_i) =  -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave
-\]</span></p>
+logit(\mu_i) = -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave
+\]</span> }</p>
 </section>
 </section>
 <section id="matriz-w-e-indice-de-moran-i" class="level2">
@@ -929,133 +933,133 @@ logit(\mu_i) =  -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov
 </div></li>
 <li><p>Determinar y gráficar los centroides y coordenadas.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>    coords <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(ComChicago))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: st_centroid assumes attributes are constant over geometries</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(ComChicago))</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>xy0 <span class="ot">=</span> coords</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>trinb<span class="ot">=</span><span class="fu">tri2nb</span>(xy0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>    xy0 <span class="ot">=</span> coords</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    trinb<span class="ot">=</span><span class="fu">tri2nb</span>(xy0)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Chicago community areas"</span>)</span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">points</span>(coords, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grid</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">border =</span> <span class="st">"grey"</span>,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">main =</span> <span class="st">"Chicago community areas"</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(coords, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
 </div></li>
-</ol>
-<!-- -->
-<ol start="3" type="1">
 <li><p>Calcular la matriz <span class="math inline">\(W\)</span> por distintos criterios (Torre, Reina, Vecinos) para la variable de interés.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Torre</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>rook_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>rook_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Reina</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>queen_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>queen_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Vecinos</span></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>tri_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>tri_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>soi_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>soi_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>relative_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>relative_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>gabriel_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>gabriel_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>knn1_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>knn1_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>knn2_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>knn2_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>knn3_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>knn3_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>knn4_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>knn4_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Torre</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>rook_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>rook_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Reina</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>queen_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>queen_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Vecinos</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>tri_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>tri_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>soi_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>soi_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>relative_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>relative_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>gabriel_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>gabriel_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,</span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>knn1_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>knn1_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>knn2_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>knn2_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>knn3_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>knn3_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>knn4_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a>knn4_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Para los <em>graph neigbours</em> se puede observar la siguiente gráfica:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1. </span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Delaunay triangulation"</span>)</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(trinb,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="co">#2.</span></span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"SOI graph"</span>)</span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(soi_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"green"</span>)</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a><span class="co">#3.</span></span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gabriel graph"</span>)</span>
-<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gabriel_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a><span class="co">#4.</span></span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Relative neighborhood graph"</span>)</span>
-<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(relative_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"yellow"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1. </span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Delaunay triangulation"</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(trinb,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="co">#2.</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"SOI graph"</span>)</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(soi_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"green"</span>)</span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="co">#3.</span></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gabriel graph"</span>)</span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gabriel_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a><span class="co">#4.</span></span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Relative neighborhood graph"</span>)</span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(relative_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"yellow"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
 </div></li>
 <li><p>Realizar la prueba de Moran y seleccionar la de menor <span class="math inline">\(valor-p\)</span>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">=</span><span class="fu">list</span>(<span class="st">"Torre_B"</span> <span class="ot">=</span> rook_nb_b,<span class="st">"Torre_W"</span> <span class="ot">=</span> rook_nb_w,</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Reina_B"</span> <span class="ot">=</span> queen_nb_b,<span class="st">"Reina_W"</span> <span class="ot">=</span> queen_nb_w,</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Tri_B"</span> <span class="ot">=</span> tri_nb_b,<span class="st">"Tri_W"</span> <span class="ot">=</span> tri_nb_w,</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Soi_B"</span> <span class="ot">=</span> soi_nb_b, <span class="st">"Soi_W"</span> <span class="ot">=</span> soi_nb_w,</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Gabriel_B"</span> <span class="ot">=</span> gabriel_nb_b,<span class="st">"Gabriel_W"</span> <span class="ot">=</span> gabriel_nb_w,</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Relative_B"</span> <span class="ot">=</span> relative_nb_b,<span class="st">"Relative_W"</span> <span class="ot">=</span> relative_nb_w,</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn1_B"</span> <span class="ot">=</span> knn1_nb_b,<span class="st">"knn1_W"</span> <span class="ot">=</span> knn1_nb_w,</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn2_B"</span> <span class="ot">=</span> knn2_nb_b,<span class="st">"knn2_W"</span> <span class="ot">=</span> knn2_nb_w,</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn3_B"</span> <span class="ot">=</span> knn3_nb_b, <span class="st">"knn3_W"</span> <span class="ot">=</span> knn3_nb_w,</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn4_B"</span> <span class="ot">=</span> knn4_nb_b, <span class="st">"knn4_W"</span> <span class="ot">=</span> knn4_nb_w)</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">=</span><span class="fu">numeric</span>(<span class="dv">0</span>)</span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mat)){</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>  aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[i]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>IMtest <span class="ot">=</span> <span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[<span class="fu">which.min</span>(aux)]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">=</span><span class="fu">list</span>(<span class="st">"Torre_B"</span> <span class="ot">=</span> rook_nb_b,<span class="st">"Torre_W"</span> <span class="ot">=</span> rook_nb_w,</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Reina_B"</span> <span class="ot">=</span> queen_nb_b,<span class="st">"Reina_W"</span> <span class="ot">=</span> queen_nb_w,</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Tri_B"</span> <span class="ot">=</span> tri_nb_b,<span class="st">"Tri_W"</span> <span class="ot">=</span> tri_nb_w,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Soi_B"</span> <span class="ot">=</span> soi_nb_b, <span class="st">"Soi_W"</span> <span class="ot">=</span> soi_nb_w,</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Gabriel_B"</span> <span class="ot">=</span> gabriel_nb_b,<span class="st">"Gabriel_W"</span> <span class="ot">=</span> gabriel_nb_w,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Relative_B"</span> <span class="ot">=</span> relative_nb_b,<span class="st">"Relative_W"</span> <span class="ot">=</span> relative_nb_w,</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn1_B"</span> <span class="ot">=</span> knn1_nb_b,<span class="st">"knn1_W"</span> <span class="ot">=</span> knn1_nb_w,</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn2_B"</span> <span class="ot">=</span> knn2_nb_b,<span class="st">"knn2_W"</span> <span class="ot">=</span> knn2_nb_w,</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn3_B"</span> <span class="ot">=</span> knn3_nb_b, <span class="st">"knn3_W"</span> <span class="ot">=</span> knn3_nb_w,</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn4_B"</span> <span class="ot">=</span> knn4_nb_b, <span class="st">"knn4_W"</span> <span class="ot">=</span> knn4_nb_w)</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">=</span><span class="fu">numeric</span>(<span class="dv">0</span>)</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mat)){</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>  aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[i]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>IMtest <span class="ot">=</span> <span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[<span class="fu">which.min</span>(aux)]], </span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></li>
 </ol>
 <p>De modo que la matriz <span class="math inline">\(W\)</span> con menor <span class="math inline">\(valor-p\)</span> es:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La matriz W seleccionada es"</span>, <span class="fu">names</span>(mat)[<span class="fu">which.min</span>(aux)], </span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"con un pvalor de"</span>, IMtest<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La matriz W seleccionada es"</span>, <span class="fu">names</span>(mat)[<span class="fu">which.min</span>(aux)], </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"con un pvalor de"</span>, IMtest<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>La matriz W seleccionada es Torre_B con un pvalor de 1.771052e-15</code></pre>
 </div>
