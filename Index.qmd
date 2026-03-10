@@ -371,8 +371,7 @@ dwtest(mod.beta1)
 
 Por lo tanto podemos observar que el modelo auxiliar definitivo corresponde a:
 
-::: {.math-small}
-
+::: math-small
 $$
 Y_i \sim Beta(\mu_i,\phi)
 $$
@@ -380,7 +379,6 @@ $$
 $$
 logit(\mu_i) = -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave
 $$
-
 :::
 
 ## Matriz W e Indice de Moran I
