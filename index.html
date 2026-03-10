@@ -153,6 +153,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="quarto-light">
@@ -457,13 +458,13 @@ window.Quarto = {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                   PopMP, PopFP, Under5, Under18, Over18, Over21, </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                   Over65, Wht14,Blk14, AI14, AS14, NHP14, </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                   Oth14,Hisp14, Pov50, Pov125, Pov150,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                   Pov185, Pov200, </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                   field_37, Pop2012))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>datos2 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, field_37, Pop2012))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                   Pov185, Pov200, field_37, Pop2012))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>datos2 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                   field_37, Pop2012))</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>datosmod1 <span class="ot">=</span> datos1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>datosmod2 <span class="ot">=</span> datos2[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -628,7 +629,8 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h3 class="anchored" data-anchor-id="stepwise-forward-1">Stepwise forward</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> datosmod2 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, AI14P, </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                    Pov125P, Pov185P, AS14P, Under18P, Over65P, PopChng))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                    Pov125P, Pov185P, AS14P, Under18P, Over65P, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                    PopChng))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Con respecto al pairplot se detectan algunas correlaciones altas <span class="math inline">\((&gt; 0.7)\)</span> entre las que se encuentran:</p>
 <ul>
@@ -666,7 +668,8 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><em>Para el lambda mínimo:</em></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng, Under18P, Over65P, Wht14P, AI14P, AS14P, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                    Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, Pov200P, COIave, Hlitave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                    Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                                    Pov200P, COIave, Hlitave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Con respecto al pairplot, al igual que en el caso anterior, se observan valores altos en la correlación. En estos se encuentran:</p>
 <ul>
@@ -912,12 +915,14 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 </div>
 </div>
 <p>Por lo tanto podemos observar que el modelo auxiliar definitivo corresponde a:</p>
-<p>{<span class="math display">\[
+<div class="math-small">
+<p><span class="math display">\[
 Y_i \sim Beta(\mu_i,\phi)
 \]</span></p>
 <p><span class="math display">\[
 logit(\mu_i) = -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave
-\]</span> }</p>
+\]</span></p>
+</div>
 </section>
 </section>
 <section id="matriz-w-e-indice-de-moran-i" class="level2">
