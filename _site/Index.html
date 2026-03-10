@@ -153,7 +153,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="quarto-light">
@@ -913,7 +912,7 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 Y_i \sim Beta(\mu_i, \phi)
 \]</span></p>
 <p><span class="math display">\[
-logit(\mu_i) =  -1.076 - 9.178e^{-3}PopChng - 1.231e^{-5}ClgGrad14 + 1.722e^{-2}Pov200P - 1.925e^{-1}COIave
+logit(\mu_i) =  -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave
 \]</span></p>
 </section>
 </section>
@@ -1144,7 +1143,7 @@ Center for Spatial Data Science, University of Chicago. 2017. <span>“Chicago H
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/lrobayoz\.github\.io\/Estad-stica_Espacial\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
