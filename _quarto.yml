@@ -8,5 +8,6 @@ format:
   html:
     theme: litera
     toc: true
+    css: styles.css
     toc-location: right
 

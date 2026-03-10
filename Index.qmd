@@ -128,13 +128,13 @@ datos1 = datos %>% dplyr::select(-c(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrt
                                    PopMP, PopFP, Under5, Under18, Over18, Over21, 
                                    Over65, Wht14,Blk14, AI14, AS14, NHP14, 
                                    Oth14,Hisp14, Pov50, Pov125, Pov150,
-                                   Pov185, Pov200, 
-                                   field_37, Pop2012))
+                                   Pov185, Pov200, field_37, Pop2012))
 
 datos2 = datos %>% dplyr::select(-c(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,
                                    TeenBirth,Assault,BrstCancr,CancerAll,Colorect,
                                    DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,
-                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, field_37, Pop2012))
+                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc,
+                                   field_37, Pop2012))
 
 datosmod1 = datos1[-c(1:5)]
 datosmod2 = datos2[-c(1:5)]
@@ -209,7 +209,8 @@ Para cada uno de los conjuntos de variables elegidas se realizará un *pairplot*
 
 ```{r}
 df1 = datosmod2 %>% dplyr::select(c(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, AI14P, 
-                                    Pov125P, Pov185P, AS14P, Under18P, Over65P, PopChng))
+                                    Pov125P, Pov185P, AS14P, Under18P, Over65P, 
+                                    PopChng))
 ```
 
 Con respecto al pairplot se detectan algunas correlaciones altas $(> 0.7)$ entre las que se encuentran:
@@ -244,7 +245,8 @@ vif(forwardmod)
 
 ```{r}
 df2 = datosmod1 %>% dplyr::select(c(PopChng, Under18P, Over65P, Wht14P, AI14P, AS14P, 
-                                    Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, Pov200P, COIave, Hlitave))
+                                    Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, 
+                                    Pov200P, COIave, Hlitave))
 ```
 
 Con respecto al pairplot, al igual que en el caso anterior, se observan valores altos en la correlación. En estos se encuentran:
@@ -369,13 +371,17 @@ dwtest(mod.beta1)
 
 Por lo tanto podemos observar que el modelo auxiliar definitivo corresponde a:
 
-{\small $$
+::: {.math-small}
+
+$$
 Y_i \sim Beta(\mu_i,\phi)
 $$
 
 $$
 logit(\mu_i) = -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave
-$$ }
+$$
+
+:::
 
 ## Matriz W e Indice de Moran I
 
