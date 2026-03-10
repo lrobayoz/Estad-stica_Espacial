@@ -106,6 +106,7 @@ library(ggspatial)
 
 ```{r}
 datos = read.dbf("C:/Users/laura/Downloads/comarea/ComArea_ACS14_f.dbf")
+datos$HISaveP = datos$HISave/100
 datos1 = datos %>% dplyr::select(-c(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,
                                    TeenBirth,Assault,BrstCancr,CancerAll,Colorect,
                                    DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,
@@ -542,7 +543,7 @@ Y de esta forma:
 ```{r}
 par(mfrow=c(1,1))
 moran.plot(datos$HISaveP, 
-           mat[[which.min(aux)]], 
+           rook_nb_b, 
            labels=as.character(datos$community), 
            xlab="IPE promedio", 
            ylab="IPE promedio rezagado", 
