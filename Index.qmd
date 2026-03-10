@@ -370,7 +370,7 @@ Y_i \sim Beta(\mu_i, \phi)
 $$
 
 $$
-logit(\mu_i) =  -1.076 - 9.178e^{-3}PopChng - 1.231e^{-5}ClgGrad14 + 1.722e^{-2}Pov200P - 1.925e^{-1}COIave 
+logit(\mu_i) =  -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave 
 $$
 
 ## Matriz W e Indice de Moran I
@@ -387,13 +387,29 @@ Para encontrar la matriz de pesos espaciales $W$, se hizo uso del indice de mora
     ComChicago = st_transform(ComChicago,CRS("+init=epsg:21897"))
 
     ComChicago$HISaveP <- ComChicago$HISave/100
-
-    coords <- st_coordinates(st_centroid(ComChicago))
-    xy0 = coords
-    trinb=tri2nb(xy0)
     ```
 
-2.  Calcular la matriz $W$ por distintos criterios (Torre, Reina, Vecinos) para la variable de interés.
+2.  Determinar y gráficar los centroides y coordenadas.
+
+    ```{r}
+        coords <- st_coordinates(st_centroid(ComChicago))
+        xy0 = coords
+        trinb=tri2nb(xy0)
+        
+        plot(st_geometry(ComChicago),
+         border = "grey",
+         axes = TRUE,
+         col = "white",
+         main = "Chicago community areas")
+        
+        points(coords, pch = 19, cex = 0.5, col = "red")
+
+        grid()
+    ```
+
+<!-- -->
+
+3.  Calcular la matriz $W$ por distintos criterios (Torre, Reina, Vecinos) para la variable de interés.
 
     ```{r}
     #| message: false
@@ -430,7 +446,46 @@ Para encontrar la matriz de pesos espaciales $W$, se hizo uso del indice de mora
     knn4_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="W",zero.policy = TRUE)
     ```
 
-3.  Realizar la prueba de Moran y seleccionar la de menor $valor-p$.
+    Para los *graph neigbours* se puede observar la siguiente gráfica:
+
+    ```{r}
+    par(mfrow = c(2,2))
+
+    #1. 
+    plot(st_geometry(ComChicago),
+         border = "grey",
+         axes = TRUE,
+         col = "white",
+         main = "Delaunay triangulation")
+    plot(trinb,xy0,add=T,col="red")
+
+
+    #2.
+    plot(st_geometry(ComChicago),
+         border = "grey",
+         axes = TRUE,
+         col = "white",
+         main = "SOI graph")
+    plot(soi_nb_b,xy0,add=T,col="green")
+
+    #3.
+    plot(st_geometry(ComChicago),
+         border = "grey",
+         axes = TRUE,
+         col = "white",
+         main = "Gabriel graph")
+    plot(gabriel_nb_b,xy0,add=T,col="blue")
+
+    #4.
+    plot(st_geometry(ComChicago),
+         border = "grey",
+         axes = TRUE,
+         col = "white",
+         main = "Relative neighborhood graph")
+    plot(relative_nb_b,xy0,add=T,col="yellow")
+    ```
+
+4.  Realizar la prueba de Moran y seleccionar la de menor $valor-p$.
 
     ```{r}
     #| message: false
