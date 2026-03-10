@@ -94,7 +94,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d1897f967d4dc882e6c3c4aa210b578e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -153,6 +153,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="quarto-light">
@@ -535,7 +536,7 @@ F-statistic: 159.4 on 12 and 64 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
@@ -643,7 +644,7 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
@@ -678,7 +679,7 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
@@ -708,7 +709,7 @@ F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
@@ -978,9 +979,9 @@ logit(\mu_i) =  -1.076 - 9.178e^{-3}PopChng - 1.231e^{-5}ClgGrad14 + 1.722e^{-2}
 <span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">=</span><span class="fu">numeric</span>(<span class="dv">0</span>)</span>
 <span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mat)){</span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>  aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(e2, mat[[i]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>  aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[i]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
 <span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>IMtest <span class="ot">=</span> <span class="fu">moran.test</span>(e2, mat[[<span class="fu">which.min</span>(aux)]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>IMtest <span class="ot">=</span> <span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[<span class="fu">which.min</span>(aux)]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></li>
 </ol>
 <p>De modo que la matriz <span class="math inline">\(W\)</span> con menor <span class="math inline">\(valor-p\)</span> es:</p>
@@ -988,7 +989,7 @@ logit(\mu_i) =  -1.076 - 9.178e^{-3}PopChng - 1.231e^{-5}ClgGrad14 + 1.722e^{-2}
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La matriz W seleccionada es"</span>, <span class="fu">names</span>(mat)[<span class="fu">which.min</span>(aux)], </span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"con un pvalor de"</span>, IMtest<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>La matriz W seleccionada es Reina_B con un pvalor de 0.03680613</code></pre>
+<pre><code>La matriz W seleccionada es Torre_B con un pvalor de 1.771052e-15</code></pre>
 </div>
 </div>
 
@@ -1074,7 +1075,7 @@ Center for Spatial Data Science, University of Chicago. 2017. <span>“Chicago H
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/lrobayoz\.github\.io\/Estad-stica_Espacial\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

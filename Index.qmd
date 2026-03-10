@@ -449,9 +449,9 @@ Para encontrar la matriz de pesos espaciales $W$, se hizo uso del indice de mora
 
     aux=numeric(0)
     for(i in 1:length(mat)){
-      aux[i]=moran.test(e2, mat[[i]], alternative="two.sided")$p.value
+      aux[i]=moran.test(ComChicago$HISaveP, mat[[i]], alternative="two.sided")$p.value
     }
-    IMtest = moran.test(e2, mat[[which.min(aux)]], alternative="two.sided")
+    IMtest = moran.test(ComChicago$HISaveP, mat[[which.min(aux)]], alternative="two.sided")
     ```
 
 De modo que la matriz $W$ con menor $valor-p$ es:
