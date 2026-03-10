@@ -1,5 +1,11 @@
 project:
-  title: "EstadisticaEspacial"
+  type: website
 
+website:
+  title: "Estadística Espacial"
 
+format:
+  html:
+    theme: cosmo
+    toc: true
 
