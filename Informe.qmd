@@ -1,0 +1,462 @@
+---
+title: "Modelamiento del Índice de Privación Económica promedio en Chicago (2014) utilizando regresión espacial"
+format: html
+bibliography: Referencias.bib
+editor: visual
+---
+
+```{r}
+#| include: false
+
+knitr::opts_chunk$set(
+  fig.width = 17,
+  fig.height = 10,
+  dpi = 300,
+  out.width = "120%"
+)
+```
+
+**Objetivo general:** Modelar el Hardship Index a partir de un modelo de regresión espacial.
+
+-   **Objetivos especificos:**
+
+    1.  Realizar un análisis exploratorio que permita evidenciar el comportamiento del **Índice de Privación Económica promedio** en Chicago para el año 2014.
+
+    2.  Desarrollar un modelo de regresión auxiliar para preseleccionar las variables explicativas, el cual se acompañe de la verificación de supuestos distribucionales y de varianza en los residuos.
+
+    3.  Seleccionar la matriz $W$ más adecuada para la corrección de autocorrelación espacial y ajustar el modelo para el **Índice de Privación Económica promedio** en Chicago para el año 2014.
+
+La base de datos trabajada corresponde a *Chicago Health and Socio-Economics* [@geoda_chicago_data], la cual contiene indicadores de salud pública y socio-economicos para las 77 áreas comunitarias de Chicago. Originalmente esta base incluye 86 variables y 77 observaciones.
+
+En este trabajo se excluyen las variables de salud pública junto, debido a que los datos que contienen son de 2012 y no tienen su actualización para el 2014, fecha de la que son extraidos los datos de los indicadores socio-economicos. De tal manera las variables son:
+
+| Variable   | Descripción                                        |
+|------------|----------------------------------------------------|
+| ComAreaID  | Identificador del área comunitaria                 |
+| community  | Nombre del área comunitaria                        |
+| TRACTnt    | Identificador del tracto censal                    |
+| shape_area | Área del polígono                                  |
+| shape_len  | Perímetro del polígono                             |
+| Pop2014    | Población en 2014                                  |
+| PopM       | Población masculina en 2014                        |
+| PopF       | Población femenina en 2014                         |
+| Under5     | Población de 0 a 5 años en 2014                    |
+| Under18    | Población de 0 a 18 años en 2014                   |
+| Over21     | Población mayor de 21 años en 2014                 |
+| Over65     | Población mayor de 65 años en 2014                 |
+| Wht14      | Población blanca en 2014                           |
+| Blk14      | Población afroamericana en 2014                    |
+| AI14       | Población indígena americana en 2014               |
+| AS14       | Población asiática en 2014                         |
+| NHP14      | Población nativa hawaiana en 2014                  |
+| Oth14      | Población de otras razas en 2014                   |
+| Hisp14     | Población hispana en 2014                          |
+| PopMP      | Proporción de hombres en la población total (2014) |
+| PopFP      | Proporción de mujeres en la población total (2014) |
+| Under5P    | Proporción de menores de 5 años                    |
+| Under18P   | Proporción de menores de 18 años                   |
+| Over18P    | Proporción de mayores de 18 años                   |
+| Over21P    | Proporción de mayores de 21 años                   |
+| Over65P    | Proporción de mayores de 65 años                   |
+| Wht14P     | Proporción de población blanca                     |
+| Blk14P     | Proporción de población afroamericana              |
+| Hisp14P    | Proporción de población hispana                    |
+| Property_C | Número de delitos contra la propiedad              |
+| PropCrRt   | Tasa de delitos contra la propiedad                |
+| Violent_C  | Número de delitos violentos                        |
+| VlntCrRt   | Tasa de delitos violentos                          |
+| PerCInc14  | Ingreso per cápita                                 |
+| Pov14      | Número de personas en pobreza                      |
+| ChildPov14 | Número de niños en pobreza                         |
+| NoHS14     | Adultos sin diploma de secundaria                  |
+| HSGrad14   | Graduados de secundaria                            |
+| SmClg14    | Personas con algo de educación universitaria       |
+| ClgGrad14  | Personas con título universitario                  |
+| LaborFrc   | Personas en la fuerza laboral                      |
+| Unemp14    | Personas desempleadas                              |
+| SESave     | Índice socioeconómico promedio                     |
+| COIave     | Índice de oportunidad infantil promedio            |
+| HISave     | Índice promedio de dificultad económica            |
+
+Es importante resaltar que para evitar problemas de multicolinealidad causados por tomar la variable en su valor original y su proporción, se tomó la decisión de solo mantener la segunda de estas presentaciones.
+
+A continuación se presentan las librerias requeridas y la base de datos con las modificaciones necesarias.
+
+**Carga de librerias**
+
+```{r}
+#| message: false
+#| warning: false
+library(ppcor)
+library(car)
+library(lmtest)
+library(foreign)
+library(dplyr)
+library(skedastic)
+library(performance)
+library(nortest)
+library(glmnet)
+library(GGally)
+library(betareg)
+library(ade4)
+library(spdep) 
+library(RANN)
+library(sp) 
+library(sf)
+library(tripack) 
+library(RColorBrewer)
+library(epitools) 
+library(DCluster)
+library(MASS)
+library(R2WinBUGS)
+library(dispmod)
+library(SpatialPack)
+library(nlme)
+library(mgcv)
+library(CARBayes)
+library(dbscan)
+```
+
+**Base de datos modificada**
+
+```{r}
+datos = read.dbf("C:/Users/laura/Downloads/comarea/ComArea_ACS14_f.dbf")
+datos1 = datos %>% dplyr::select(-c(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,
+                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,
+                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,
+                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, 
+                                   PopMP, PopFP, Under5, Under18, Over18, Over21, 
+                                   Over65, Wht14,Blk14, AI14, AS14, NHP14, 
+                                   Oth14,Hisp14, Pov50, Pov125, Pov150,
+                                   Pov185, Pov200, field_37, Pop2012))
+
+datos2 = datos %>% dplyr::select(-c(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,
+                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,
+                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,
+                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, field_37, Pop2012))
+
+datosmod1 = datos1[-c(1:5)]
+datosmod2 = datos2[-c(1:5)]
+```
+
+## Selección de variables
+
+Para la selección de variables se hizo uso del stepwise forward y de la regularización Lasso. El primero de ellos parte del modelo nulo y construye el modelo final apartir de una métrica de validación; y el segundo incluye una penalización que fuerza que algunos coeficientes de los predictores tiendan a cero.
+
+### Stepwise forward:
+
+```{r}
+#| message: false
+#| warning: false
+#| results: hide
+#:: Modelo completo:
+modcomp = lm(HISave ~. , data = datosmod2)
+
+#:: Modelo con intercepto:
+modnull = lm(HISave ~1 , data = datosmod2)
+
+#:: Utilizando el criterio forward:
+forwardmod = step(modnull, scope = list(lower = modnull, upper = modcomp), 
+                  direction = "forward")
+
+```
+
+De tal forma el modelo obtenido es:
+
+```{r}
+summary(forwardmod)
+```
+
+### Regularización Lasso
+
+Para este metodo se divide en dos matrices el conjunto de datos; $X$ que contiene las variables explicativas y $Y$ que incluye la variable respuesta, a partir de este se hace la elección lambda correspondiente, observe que:
+
+```{r}
+#:: Designación matrices
+X = as.matrix(datosmod1[, -37])
+Y = datosmod1$HISave
+
+#:: Calculo de lambda
+cv_lasso = cv.glmnet(X, Y, alpha = 1)
+plot(cv_lasso)
+```
+
+De tal forma el modelo obtenido con el lambda con menor MSE es:
+
+```{r}
+Lassomodmin = lm(HISave ~ PopChng + Under18P + Over65P + 
+                   Wht14P + AI14P + AS14P + Oth14P + PerCInc14 +
+                   NoHS14 + ClgGrad14 + Pov185P + Pov200P + COIave +
+                   Hlitave, data = datosmod1)
+summary(Lassomodmin)
+```
+
+Y el modelo obtenido con el lambda a una desviación estándar es:
+
+```{r}
+Lassomod1se = lm(HISave ~ PopChng + Under18P + AI14P +
+                   Oth14P + NoHS14 + ClgGrad14 + Pov200P + COIave
+                 , data = datosmod1)
+summary(Lassomod1se)
+```
+
+## Correlación y multicolinealidad
+
+Para cada uno de los conjuntos de variables elegidas se realizará un *pairplot* y se calculará el *Factor de Inflación de Varianza* (VIF) para determinar la multicolinealidad. El conjunto de variables seleccionado para cada uno de los métodos es:
+
+### Stepwise forward
+
+```{r}
+df1 = datosmod2 %>% dplyr::select(c(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, AI14P, Pov125P, Pov185P, AS14P, Under18P, Over65P, PopChng))
+```
+
+Con respecto al pairplot se detectan algunas correlaciones altas $(> 0.7)$ entre las que se encuentran:
+
+-   ***Pov200P*** **- *COIave*:** Con una correlación de $-0.871$.
+
+-   ***Pov200P - Pov125P y Pov200P - Pov185P:*** La primera con una correlación de 0.995 y la segunda con $0.997$.
+
+-   ***Pov125P - COIave y Pov185P - COIave:*** Con una correlación de $-0.830$ y $-0.868$ respectivamente.
+
+-   ***Under18P - COIave:*** Con una correlación de $-0.755$.
+
+-   ***Pov185P - Pov125P:*** Con una correlación de $0.970$.
+
+Es fácil notar que la mayoría de las correlaciones ocurren entre proporciones de pobreza que acumulen cierta cantidad de ingreso, lo cual es esperable, pues las variables se almacenan entre ellas.
+
+Las correlaciones obtenidas nos dejan con cierto indicio de multicolinealidad que será verificado por medio del VIF.
+
+```{r}
+ggpairs(df1)
+```
+
+Evaluando el VIF se rectifica la sospecha que se tenia de multicolinealidad grave, pues se tienen valores de $VIF > 10$.
+
+```{r}
+vif(forwardmod)
+```
+
+### Regularización Lasso
+
+*Para el lambda mínimo:*
+
+```{r}
+df2 = datosmod1 %>% dplyr::select(c(PopChng, Under18P, Over65P, Wht14P, AI14P, AS14P, Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, Pov200P, COIave, Hlitave))
+```
+
+Con respecto al pairplot, al igual que en el caso anterior, se observan valores altos en la correlación. En estos se encuentran:
+
+-   ***COIave - Under18P:*** Con una correlación del $-0.755$.
+
+-   ***ClgGrad14 - PerCinc14:*** Con una correlación de $0.954$.
+
+-   ***Pov200P -*** ***Pov185P:*** Con una correlación de $0.997$.
+
+-   ***Pov185P - COIave y Pov200P - COIave:*** Con una correlación de $-0.868$ y $-0.871$ respectivamente.
+
+Correlaciones que nuevamente puede inducir a resultados de multicolinealidad altos.
+
+```{r}
+ggpairs(df2)
+```
+
+Evaluando el VIF afirmamos la sospecha y se afirma la presencia de multicolinealidad alta.
+
+```{r}
+vif(Lassomodmin)
+```
+
+*Para el lambda a una desviacion estándar:*
+
+```{r}
+df3 = datosmod1 %>% dplyr::select(c(PopChng, Under18P, AI14P, Oth14P, NoHS14, ClgGrad14, Pov200P, COIave))
+```
+
+Con respecto al pairplot se detectan las siguientes correlaciones altas:
+
+-   ***COIave - Under18P:*** Con una correlación de $-0.755$.
+
+-   ***COIave - Pov200P:*** Con una correlación de $-0.871$.
+
+***Nota:*** Es importante observar que en cada uno de los métodos utilizados parala selección de variables se obtuvieron estas parejas.
+
+```{r}
+ggpairs(df3)
+```
+
+Evaluando el VIF, observamos que no se tienen multicolinealidad alta, sin embargo, si se tiene presencia de multicolinealidad moderada.
+
+```{r}
+vif(Lassomod1se)
+```
+
+## Modelo regresión auxiliar inicial
+
+Debido a que nuestra variable respuesta posee un rango limitado entre 0 y 100 al tratarse de un índice, se tomó como alternativa inicial utilizar un modelo de Regresión Beta utilizando las covariables seleccionadas anteriormente a partir del modelo de Regresión Lineal múltiple. A continuación reescalamos la variable para utilizarla adecuadamente, de donde su rango estará en los valores entre 0 y 1.
+
+```{r}
+datosmod1$HISaveP <- datosmod1$HISave/100
+```
+
+De este modo, realizando el ajuste obtenemos que:
+
+```{r}
+mod.beta = betareg::betareg(HISaveP ~ PopChng + Under18P + AI14P +      
+                              Oth14P + NoHS14 + ClgGrad14 + Pov200P + COIave
+                            , data = datosmod1) 
+summary(mod.beta)
+```
+
+Se destacan las complicaciones numéricas implicadas detrás de realizar el ajuste a partir de una Regresión Beta, haciendo la recomendación adicional de trabajar bajo un modelo Gaussiano restringido. Realizando una evaluación de los supuestos de multicolinealidad, normalidad y homocedasticidad:
+
+### Multicolinealidad
+
+```{r}
+vif(mod.beta)
+```
+
+### Homocedasticidad
+
+```{r}
+bptest(mod.beta)
+```
+
+### Normalidad
+
+```{r}
+e1 <- mod.beta$residuals  
+shapiro.test(e1) ; lillie.test(e1)
+```
+
+Por consiguiente, al cumplirse los supuestos de normalidad y homocedasticidad hacemos la re evaluación de la significancia de los coeficientes, haciendo el re ajuste del modelo, obteniendo de este modo el siguiente modelo final.
+
+```{r}
+mod.beta1 = betareg::betareg(HISaveP ~ PopChng + ClgGrad14 + Pov200P + COIave                  
+                             , data = datosmod1) 
+summary(mod.beta1)
+```
+
+Verificando y haciendo la re evaluación de supuestos, obtenemos que se cumplen en su mayoría a excepción de la autocorrelación, punto que trataremos más adelante con el ajuste de un Modelo de Regresión Espacial.
+
+### Multicolinealidad
+
+```{r}
+vif(mod.beta1)
+```
+
+### Normalidad
+
+```{r}
+e2 <- mod.beta1$residuals  
+shapiro.test(e2) ;lillie.test(e2)
+```
+
+### Homocedasticidad
+
+```{r}
+bptest(mod.beta1)
+```
+
+### Autocorrelación
+
+```{r}
+dwtest(mod.beta1)
+```
+
+Por lo tanto podemos observar que el modelo auxiliar definitivo corresponde a:
+
+$$
+Y_i \sim Beta(\mu_i, \phi)
+$$
+
+$$
+logit(\mu_i) =  -1.076 - 9.178e^{-3}PopChng - 1.231e^{-5}ClgGrad14 + 1.722e^{-2}Pov200P - 1.925e^{-1}COIave 
+$$
+
+## Matriz W e Indice de Moran I
+
+Para encontrar la matriz de pesos espaciales $W$, se hizo uso del indice de moran. De esta forma el procedimiento correspondia a:
+
+1.  Subir el .*shp* de los datos y realizar las modificaciones necesarias.
+
+    ```{r}
+    #| message: false
+    #| warning: false
+    #| results: hide
+    ComChicago = sf::read_sf("C:/Users/laura/Downloads/comarea/ComArea_ACS14_f.shp")
+    ComChicago = st_transform(ComChicago,CRS("+init=epsg:21897"))
+
+    ComChicago$HISaveP <- ComChicago$HISave/100
+
+    coords <- st_coordinates(st_centroid(ComChicago))
+    xy0 = coords
+    trinb=tri2nb(xy0)
+    ```
+
+2.  Calcular la matriz $W$ por distintos criterios (Torre, Reina, Vecinos) para la variable de interés.
+
+    ```{r}
+    #| message: false
+    #| warning: false
+    #| results: hide
+    #:: Criterio Torre
+    rook_nb_b=nb2listw(poly2nb(ComChicago,queen=FALSE), style="B",zero.policy = TRUE)
+    rook_nb_w=nb2listw(poly2nb(ComChicago,queen=FALSE), style="W",zero.policy = TRUE)
+
+    #:: Criterio Reina
+    queen_nb_b=nb2listw(poly2nb(ComChicago,queen=TRUE), style="B",zero.policy = TRUE)
+    queen_nb_w=nb2listw(poly2nb(ComChicago,queen=TRUE), style="W",zero.policy = TRUE)
+
+    #:: Criterio Vecinos
+    tri_nb_b=nb2listw(tri2nb(xy0), style="B",zero.policy = TRUE)
+    tri_nb_w=nb2listw(tri2nb(xy0), style="W",zero.policy = TRUE)
+
+    soi_nb_b=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="B",zero.policy = TRUE)
+    soi_nb_w=nb2listw(graph2nb(soi.graph(trinb,xy0)), style="W",zero.policy = TRUE)
+
+    relative_nb_b=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+    relative_nb_w=nb2listw(graph2nb(relativeneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+    gabriel_nb_b=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="B",zero.policy = TRUE)
+    gabriel_nb_w=nb2listw(graph2nb(gabrielneigh(xy0), sym=TRUE), style="W",zero.policy = TRUE)
+
+    knn1_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="B",zero.policy = TRUE)
+    knn1_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 1)), style="W",zero.policy = TRUE)
+    knn2_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="B",zero.policy = TRUE)
+    knn2_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 2)), style="W",zero.policy = TRUE)
+    knn3_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="B",zero.policy = TRUE)
+    knn3_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 3)), style="W",zero.policy = TRUE)
+    knn4_nb_b=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="B",zero.policy = TRUE)
+    knn4_nb_w=nb2listw(knn2nb(knearneigh(xy0, k = 4)), style="W",zero.policy = TRUE)
+    ```
+
+3.  Realizar la prueba de Moran y seleccionar la de menor $valor-p$.
+
+    ```{r}
+    #| message: false
+    #| warning: false
+    #| results: hide
+    mat=list("Torre_B" = rook_nb_b,"Torre_W" = rook_nb_w,
+             "Reina_B" = queen_nb_b,"Reina_W" = queen_nb_w,
+             "Tri_B" = tri_nb_b,"Tri_W" = tri_nb_w,
+             "Soi_B" = soi_nb_b, "Soi_W" = soi_nb_w,
+             "Gabriel_B" = gabriel_nb_b,"Gabriel_W" = gabriel_nb_w,
+             "Relative_B" = relative_nb_b,"Relative_W" = relative_nb_w,
+             "knn1_B" = knn1_nb_b,"knn1_W" = knn1_nb_w,
+             "knn2_B" = knn2_nb_b,"knn2_W" = knn2_nb_w,
+             "knn3_B" = knn3_nb_b, "knn3_W" = knn3_nb_w,
+             "knn4_B" = knn4_nb_b, "knn4_W" = knn4_nb_w)
+
+    aux=numeric(0)
+    for(i in 1:length(mat)){
+      aux[i]=moran.test(e2, mat[[i]], alternative="two.sided")$p.value
+    }
+    IMtest = moran.test(e2, mat[[which.min(aux)]], alternative="two.sided")
+    ```
+
+De modo que la matriz $W$ con menor $valor-p$ es:
+
+```{r}
+cat("La matriz W seleccionada es", names(mat)[which.min(aux)], 
+    "con un pvalor de", IMtest$p.value)
+```
