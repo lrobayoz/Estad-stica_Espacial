@@ -168,27 +168,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#selección-de-variables" id="toc-selección-de-variables" class="nav-link active" data-scroll-target="#selección-de-variables">Selección de variables</a>
+  <li><a href="#modelo-normal" id="toc-modelo-normal" class="nav-link active" data-scroll-target="#modelo-normal">Modelo Normal</a>
+  <ul class="collapse">
+  <li><a href="#selección-de-variables" id="toc-selección-de-variables" class="nav-link" data-scroll-target="#selección-de-variables">Selección de variables</a>
   <ul class="collapse">
   <li><a href="#stepwise-forward" id="toc-stepwise-forward" class="nav-link" data-scroll-target="#stepwise-forward">Stepwise forward:</a></li>
   <li><a href="#regularización-lasso" id="toc-regularización-lasso" class="nav-link" data-scroll-target="#regularización-lasso">Regularización Lasso</a></li>
   </ul></li>
-  <li><a href="#correlación-y-multicolinealidad" id="toc-correlación-y-multicolinealidad" class="nav-link" data-scroll-target="#correlación-y-multicolinealidad">Correlación y multicolinealidad</a>
+  <li><a href="#correlación-y-multicolinealidad" id="toc-correlación-y-multicolinealidad" class="nav-link" data-scroll-target="#correlación-y-multicolinealidad">Correlación y Multicolinealidad</a>
   <ul class="collapse">
   <li><a href="#stepwise-forward-1" id="toc-stepwise-forward-1" class="nav-link" data-scroll-target="#stepwise-forward-1">Stepwise forward</a></li>
   <li><a href="#regularización-lasso-1" id="toc-regularización-lasso-1" class="nav-link" data-scroll-target="#regularización-lasso-1">Regularización Lasso</a></li>
   </ul></li>
-  <li><a href="#modelo-regresión-auxiliar-inicial" id="toc-modelo-regresión-auxiliar-inicial" class="nav-link" data-scroll-target="#modelo-regresión-auxiliar-inicial">Modelo regresión auxiliar inicial</a>
-  <ul class="collapse">
-  <li><a href="#multicolinealidad" id="toc-multicolinealidad" class="nav-link" data-scroll-target="#multicolinealidad">Multicolinealidad</a></li>
-  <li><a href="#homocedasticidad" id="toc-homocedasticidad" class="nav-link" data-scroll-target="#homocedasticidad">Homocedasticidad</a></li>
-  <li><a href="#normalidad" id="toc-normalidad" class="nav-link" data-scroll-target="#normalidad">Normalidad</a></li>
-  <li><a href="#multicolinealidad-1" id="toc-multicolinealidad-1" class="nav-link" data-scroll-target="#multicolinealidad-1">Multicolinealidad</a></li>
-  <li><a href="#normalidad-1" id="toc-normalidad-1" class="nav-link" data-scroll-target="#normalidad-1">Normalidad</a></li>
-  <li><a href="#homocedasticidad-1" id="toc-homocedasticidad-1" class="nav-link" data-scroll-target="#homocedasticidad-1">Homocedasticidad</a></li>
-  <li><a href="#autocorrelación" id="toc-autocorrelación" class="nav-link" data-scroll-target="#autocorrelación">Autocorrelación</a></li>
+  <li><a href="#modelo-de-regresión-auxiliar-inicial" id="toc-modelo-de-regresión-auxiliar-inicial" class="nav-link" data-scroll-target="#modelo-de-regresión-auxiliar-inicial">Modelo de regresión auxiliar inicial</a></li>
   </ul></li>
-  <li><a href="#matriz-w-e-indice-de-moran-i" id="toc-matriz-w-e-indice-de-moran-i" class="nav-link" data-scroll-target="#matriz-w-e-indice-de-moran-i">Matriz W e Indice de Moran I</a></li>
   </ul>
 </nav>
     </div>
@@ -216,15 +209,15 @@ window.Quarto = {
 
 <p><strong>Objetivo general:</strong> Modelar el Hardship Index a partir de un modelo de regresión espacial.</p>
 <ul>
-<li><p><strong>Objetivos especificos:</strong></p>
+<li><p><strong>Objetivos específicos:</strong></p>
 <ol type="1">
-<li><p>Realizar un análisis exploratorio que permita evidenciar el comportamiento del <strong>Índice de Privación Económica promedio</strong> en Chicago para el año 2014.</p></li>
+<li><p>Realizar un análisis exploratorio que permita evidenciar el comportamiento del <strong>Indice de Privación Económica promedio</strong> en Chicago para el año 2014.</p></li>
 <li><p>Desarrollar un modelo de regresión auxiliar para preseleccionar las variables explicativas, el cual se acompañe de la verificación de supuestos distribucionales y de varianza en los residuos.</p></li>
-<li><p>Seleccionar la matriz <span class="math inline">\(W\)</span> más adecuada para la corrección de autocorrelación espacial y ajustar el modelo para el <strong>Índice de Privación Económica promedio</strong> en Chicago para el año 2014.</p></li>
+<li><p>Seleccionar la matriz <span class="math inline">\(W\)</span> más adecuada para la corrección de auto-correlación espacial y ajustar el modelo para el <strong>Indice de Privación Económica promedio</strong> en Chicago para el año 2014.</p></li>
 </ol></li>
 </ul>
-<p>La base de datos trabajada corresponde a <em>Chicago Health and Socio-Economics</em> <span class="citation" data-cites="geoda_chicago_data">(<a href="#ref-geoda_chicago_data" role="doc-biblioref">Center for Spatial Data Science, University of Chicago 2017</a>)</span>, la cual contiene indicadores de salud pública y socio-economicos para las 77 áreas comunitarias de Chicago. Originalmente esta base incluye 86 variables y 77 observaciones.</p>
-<p>En este trabajo se excluyen las variables de salud pública junto, debido a que los datos que contienen son de 2012 y no tienen su actualización para el 2014, fecha de la que son extraidos los datos de los indicadores socio-economicos. De tal manera las variables son:</p>
+<p>La base de datos trabajada corresponde a <em>Chicago Health and Socio-Economics</em> <span class="citation" data-cites="geoda_chicago_data">(<a href="#ref-geoda_chicago_data" role="doc-biblioref">Center for Spatial Data Science, University of Chicago 2017</a>)</span>, la cual contiene indicadores de salud pública y socio-económicos para las 77 áreas comunitarias de Chicago. Originalmente esta base incluye 86 variables y 77 observaciones.</p>
+<p>En este trabajo se excluyen las variables de salud pública junto, debido a que los datos que contienen son de 2012 y no tienen su actualización para el 2014, fecha de la que son extraídos los datos de los indicadores socio-económicos. De tal manera las variables son:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -431,34 +424,51 @@ window.Quarto = {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbscan);<span class="fu">library</span>(mapview);<span class="fu">library</span>(spatialreg)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GISTools);<span class="fu">library</span>(psych);<span class="fu">library</span>(FactoClass)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GWmodel);<span class="fu">library</span>(viridis);<span class="fu">library</span>(mapsRinteractive)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial);<span class="fu">library</span>(SelectBoost.beta);<span class="fu">library</span>(simpleboot)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Base de datos modificada</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">=</span> <span class="fu">read.dbf</span>(<span class="st">"C:/Users/laura/Downloads/comarea/ComArea_ACS14_f.dbf"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>HISaveP <span class="ot">=</span> datos<span class="sc">$</span>HISave<span class="sc">/</span><span class="dv">100</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>datos1 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                   PopMP, PopFP, Under5, Under18, Over18, Over21, </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                   Over65, Wht14,Blk14, AI14, AS14, NHP14, </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                   Oth14,Hisp14, Pov50, Pov125, Pov150,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                   Pov185, Pov200, field_37, Pop2012))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>datos2 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                                   field_37, Pop2012))</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>datosmod1 <span class="ot">=</span> datos1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>datosmod2 <span class="ot">=</span> datos2[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                    TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                    DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                    Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                    PopM, PopF, Under5, Under18, Over18, Over21, </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                    Over65, Wht14,Blk14, AI14, AS14, NHP14, </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                    Oth14,Hisp14, Pov50, Pov125, Pov150,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                    Pov185, Pov200, field_37, Pop2012, Pov14,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                    Pov50P, Pov150P, Pov125P, Pov185P, Pov200P,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                    Property_C, Violent_C, HISaveP, ChldPov14))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>datos2 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                   TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                                   DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                                   Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                                   field_37, Pop2012))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>datos3 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(BirthRate,FertRate,LoBirthR,PrenScrn,PretBrth,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                                    TeenBirth,Assault,BrstCancr,CancerAll,Colorect,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                                    DiabetM,FirearmM,InfntMR,LungCancer,ProstateC,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                                    Stroke,ChlBLLS,ChlLeadP,GonorrF,GonorrM,Tuberc,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                                    PopMP, PopFP, Under5P, Under18P, Over18P, Over21P, </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                                    Over65P, Wht14P,Blk14P, AI14P, AS14P, NHP14P, </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                                    Oth14P,Hisp14P, Pov50P, Pov125P, Pov150P,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                                    Pov185P, Pov200P, field_37, Pop2012, HISave,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                                    Property_C, Violent_C, PopM,Under18, Under5,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                                    Over21, Over65))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>datosmod1 <span class="ot">=</span> datos1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>datosmod2 <span class="ot">=</span> datos2[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>datosmod3 <span class="ot">=</span> datos3[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Agregado a esto se realiza un mapa de los datos observados, para lo que se necesita realizar la carga del <em>.shp</em> y la definición de las coordenadas. De modo que:</p>
+<p>Agregado a esto se realiza un mapa de los datos observados y de su agrupación en quantiles, para lo que se necesita realizar la carga del <em>.shp</em> y la definición de las coordenadas. De modo que:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ComChicago <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">read_sf</span>(<span class="st">"C:/Users/laura/Downloads/comarea/ComArea_ACS14_f.shp"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ComChicago <span class="ot">=</span> <span class="fu">st_transform</span>(ComChicago,<span class="fu">CRS</span>(<span class="st">"+init=epsg:21897"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ComChicago <span class="ot">=</span> <span class="fu">st_transform</span>(ComChicago,<span class="fu">CRS</span>(<span class="st">"+init=epsg:26971"</span>))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ComChicago<span class="sc">$</span>HISaveP <span class="ot">&lt;-</span> ComChicago<span class="sc">$</span>HISave<span class="sc">/</span><span class="dv">100</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -484,22 +494,32 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/graf1-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Al querer trabajar con el Índice de Privación Promedio en Chicago como variable respuesta, debemos tener en cuenta su naturaleza, es decir, es un Índice que se encuentra entre 0 y 100. Por tanto creemos pertinente considerar y formular tanto un modelo normal como un modelo beta que tome en cuenta esta naturaleza.</p>
+<p>Se presentará para cada una de las propuestas:</p>
+<ul>
+<li><p>Selección de variables.</p></li>
+<li><p>Revisión de correlación y multicolinealidad.</p></li>
+<li><p>Revisión de supuestos.</p></li>
+<li><p>Modelo auxiliar final.</p></li>
+</ul>
+<section id="modelo-normal" class="level1">
+<h1>Modelo Normal</h1>
 <section id="selección-de-variables" class="level2">
 <h2 class="anchored" data-anchor-id="selección-de-variables">Selección de variables</h2>
-<p>Para la selección de variables se hizo uso del stepwise forward y de la regularización Lasso. El primero de ellos parte del modelo nulo y construye el modelo final apartir de una métrica de validación; y el segundo incluye una penalización que fuerza que algunos coeficientes de los predictores tiendan a cero.</p>
+<p>Para la selección de variables se hizo uso del stepwise forward y de la regularización Lasso. El primero de ellos parte del modelo nulo y construye el modelo final a partir de una métrica de validación; y el segundo incluye una personalización que fuerza que algunos coeficientes de los predictores tiendan a cero.</p>
 <section id="stepwise-forward" class="level3">
 <h3 class="anchored" data-anchor-id="stepwise-forward">Stepwise forward:</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Modelo completo:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>modcomp <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span>. , <span class="at">data =</span> datosmod2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>modcomp <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span>. , <span class="at">data =</span> datosmod1)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Modelo con intercepto:</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>modnull <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span><span class="dv">1</span> , <span class="at">data =</span> datosmod2)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>modnull <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span><span class="dv">1</span> , <span class="at">data =</span> datosmod1)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Utilizando el criterio forward:</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>forwardmod <span class="ot">=</span> <span class="fu">step</span>(modnull, <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">lower =</span> modnull, <span class="at">upper =</span> modcomp), </span>
@@ -508,181 +528,208 @@ window.Quarto = {
 <p>De tal forma el modelo obtenido es:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(forwardmod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in summary.lm(forwardmod): essentially perfect fit: summary may be
-unreliable</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = HISave ~ HISaveP + Under18P + PopMP + Blk14P + SESave + 
-    Property_C + Over21P + Under5, data = datosmod2)
+lm(formula = HISave ~ COIave + Over21P + AS14P + Wht14P + Hisp14P + 
+    PopMP + Hlitave + AI14P + VlntCrRt + PropCrRt + SESave + 
+    PerCInc14 + NoHS14 + Oth14P + Blk14P + ClgGrad14 + Over65P, 
+    data = datosmod1)
 
 Residuals:
-       Min         1Q     Median         3Q        Max 
--6.352e-14 -2.680e-15  5.600e-16  3.432e-15  1.649e-14 
+    Min      1Q  Median      3Q     Max 
+-4.4631 -1.4972 -0.2193  1.0843  5.9901 
 
 Coefficients:
-              Estimate Std. Error    t value Pr(&gt;|t|)    
-(Intercept) -3.045e-13  7.824e-14 -3.892e+00 0.000229 ***
-HISaveP      1.000e+02  2.203e-14  4.539e+15  &lt; 2e-16 ***
-Under18P     2.643e-15  7.338e-16  3.601e+00 0.000597 ***
-PopMP        2.124e-15  6.096e-16  3.484e+00 0.000868 ***
-Blk14P       1.532e-16  5.647e-17  2.712e+00 0.008456 ** 
-SESave       7.188e-16  2.977e-16  2.415e+00 0.018432 *  
-Property_C   4.700e-18  1.923e-18  2.444e+00 0.017129 *  
-Over21P      1.350e-15  6.880e-16  1.962e+00 0.053912 .  
-Under5      -1.652e-18  1.015e-18 -1.628e+00 0.108210    
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.725e+02  3.889e+01   4.436 4.06e-05 ***
+COIave      -4.727e+00  1.849e+00  -2.557 0.013154 *  
+Over21P     -2.799e-01  9.394e-02  -2.979 0.004189 ** 
+AS14P       -1.085e+00  3.572e-01  -3.037 0.003552 ** 
+Wht14P      -1.338e+00  3.629e-01  -3.688 0.000495 ***
+Hisp14P      1.837e-01  3.773e-02   4.870 8.74e-06 ***
+PopMP        9.779e-02  1.480e-01   0.661 0.511261    
+Hlitave      8.235e-02  3.402e-02   2.421 0.018577 *  
+AI14P       -1.887e+00  6.981e-01  -2.703 0.008957 ** 
+VlntCrRt     1.716e+02  3.359e+01   5.108 3.67e-06 ***
+PropCrRt    -1.077e+02  2.530e+01  -4.257 7.53e-05 ***
+SESave      -2.593e-01  9.739e-02  -2.662 0.009987 ** 
+PerCInc14   -7.834e-06  3.096e-06  -2.530 0.014096 *  
+NoHS14       2.910e-04  9.823e-05   2.963 0.004389 ** 
+Oth14P      -1.309e+00  3.591e-01  -3.645 0.000567 ***
+Blk14P      -1.243e+00  3.669e-01  -3.389 0.001257 ** 
+ClgGrad14    2.158e-04  1.156e-04   1.867 0.066843 .  
+Over65P      1.565e-01  1.027e-01   1.523 0.133163    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.481e-15 on 68 degrees of freedom
-Multiple R-squared:      1, Adjusted R-squared:      1 
-F-statistic: 1.323e+31 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 2.23 on 59 degrees of freedom
+Multiple R-squared:  0.9692,    Adjusted R-squared:  0.9603 
+F-statistic: 109.1 on 17 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
 <section id="regularización-lasso" class="level3">
 <h3 class="anchored" data-anchor-id="regularización-lasso">Regularización Lasso</h3>
-<p>Para este metodo se divide en dos matrices el conjunto de datos; <span class="math inline">\(X\)</span> que contiene las variables explicativas y <span class="math inline">\(Y\)</span> que incluye la variable respuesta, a partir de este se hace la elección lambda correspondiente, observe que:</p>
+<p>Para este método se divide en dos matrices el conjunto de datos; <span class="math inline">\(X\)</span> que contiene las variables explicativas y <span class="math inline">\(Y\)</span> que incluye la variable respuesta, a partir de este se hace la elección del lambda correspondiente, observe que:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Designación matrices</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">as.matrix</span>(datosmod1[, <span class="sc">-</span><span class="dv">37</span>])</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">=</span> datosmod1<span class="sc">$</span>HISave</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Calculo de lambda</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>cv_lasso <span class="ot">=</span> <span class="fu">cv.glmnet</span>(X, Y, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv_lasso)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Designación matrices</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">as.matrix</span>(datosmod1[, <span class="sc">-</span><span class="dv">28</span>])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">=</span> datosmod1<span class="sc">$</span>HISave</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Calculo de lambda</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cv_lasso <span class="ot">=</span> <span class="fu">cv.glmnet</span>(X, Y, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv_lasso)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/lassomod-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>De tal forma el modelo obtenido con el lambda con menor MSE es:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Lassomodmin <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span> PopChng <span class="sc">+</span> Under18P <span class="sc">+</span> Over65P <span class="sc">+</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                   Wht14P <span class="sc">+</span> AI14P <span class="sc">+</span> AS14P <span class="sc">+</span> Oth14P <span class="sc">+</span> PerCInc14 <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                   NoHS14 <span class="sc">+</span> ClgGrad14 <span class="sc">+</span> Pov185P <span class="sc">+</span> Pov200P <span class="sc">+</span> COIave <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                   Hlitave, <span class="at">data =</span> datosmod1)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lassomodmin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Lassomodmin <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span> PopChng <span class="sc">+</span> Under5P <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                   Under18P <span class="sc">+</span> Over21P <span class="sc">+</span> Over65P <span class="sc">+</span> Wht14P <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                   AI14P <span class="sc">+</span> AS14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Oth14P <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                   Hisp14P <span class="sc">+</span> PropCrRt <span class="sc">+</span> VlntCrRt <span class="sc">+</span> PerCInc14 <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                   NoHS14 <span class="sc">+</span> HSGrad14 <span class="sc">+</span> SmClg14 <span class="sc">+</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                   ClgGrad14 <span class="sc">+</span> LaborFrc <span class="sc">+</span> COIave <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                   SESave <span class="sc">+</span> Hlitave, <span class="at">data =</span> datosmod1)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lassomodmin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = HISave ~ PopChng + Under18P + Over65P + Wht14P + 
-    AI14P + AS14P + Oth14P + PerCInc14 + NoHS14 + ClgGrad14 + 
-    Pov185P + Pov200P + COIave + Hlitave, data = datosmod1)
+lm(formula = HISave ~ PopChng + Under5P + Under18P + Over21P + 
+    Over65P + Wht14P + AI14P + AS14P + NHP14P + Oth14P + Hisp14P + 
+    PropCrRt + VlntCrRt + PerCInc14 + NoHS14 + HSGrad14 + SmClg14 + 
+    ClgGrad14 + LaborFrc + COIave + SESave + Hlitave, data = datosmod1)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.0998 -1.6076 -0.1533  1.6378  5.1183 
+-4.1264 -1.4456 -0.1696  1.1818  5.7275 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  3.278e+00  8.573e+00   0.382  0.70353    
-PopChng     -1.654e-01  7.257e-02  -2.278  0.02616 *  
-Under18P     3.145e-01  8.435e-02   3.728  0.00042 ***
-Over65P      2.589e-01  9.720e-02   2.664  0.00983 ** 
-Wht14P      -1.283e-02  1.500e-02  -0.855  0.39567    
-AI14P       -1.521e+00  6.802e-01  -2.235  0.02900 *  
-AS14P        5.367e-02  3.209e-02   1.672  0.09947 .  
-Oth14P       8.371e-02  2.872e-02   2.914  0.00495 ** 
-PerCInc14   -1.930e-06  3.022e-06  -0.639  0.52534    
-NoHS14       2.041e-04  9.615e-05   2.123  0.03778 *  
-ClgGrad14   -4.583e-05  1.119e-04  -0.410  0.68356    
-Pov185P      2.288e-01  2.708e-01   0.845  0.40135    
-Pov200P      1.205e-01  2.635e-01   0.458  0.64890    
-COIave      -4.916e+00  1.705e+00  -2.884  0.00539 ** 
-Hlitave      5.017e-02  3.495e-02   1.436  0.15613    
+(Intercept)  7.239e+01  2.016e+01   3.591 0.000712 ***
+PopChng     -4.879e-02  8.499e-02  -0.574 0.568291    
+Under5P      9.442e-02  1.460e-01   0.647 0.520454    
+Under18P    -1.805e-01  2.041e-01  -0.885 0.380315    
+Over21P     -5.149e-01  1.939e-01  -2.655 0.010391 *  
+Over65P      3.612e-01  1.241e-01   2.911 0.005233 ** 
+Wht14P      -1.286e-01  2.540e-02  -5.062 5.14e-06 ***
+AI14P       -1.984e-01  7.421e-01  -0.267 0.790275    
+AS14P        7.577e-02  4.050e-02   1.871 0.066760 .  
+NHP14P      -2.651e+00  2.693e+00  -0.984 0.329340    
+Oth14P      -1.223e-01  6.227e-02  -1.963 0.054772 .  
+Hisp14P      1.955e-01  4.335e-02   4.510 3.54e-05 ***
+PropCrRt    -1.243e+02  2.936e+01  -4.235 8.93e-05 ***
+VlntCrRt     1.687e+02  3.862e+01   4.369 5.71e-05 ***
+PerCInc14   -1.289e-05  3.717e-06  -3.469 0.001033 ** 
+NoHS14      -1.887e-07  2.516e-04  -0.001 0.999404    
+HSGrad14     6.588e-04  3.850e-04   1.711 0.092774 .  
+SmClg14     -1.168e-03  3.658e-04  -3.192 0.002358 ** 
+ClgGrad14    2.175e-04  2.234e-04   0.973 0.334687    
+LaborFrc     2.984e-04  2.200e-04   1.357 0.180575    
+COIave      -2.418e+00  2.199e+00  -1.100 0.276359    
+SESave      -3.697e-01  1.122e-01  -3.295 0.001740 ** 
+Hlitave      1.039e-01  3.654e-02   2.844 0.006272 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 2.264 on 62 degrees of freedom
-Multiple R-squared:  0.9666,    Adjusted R-squared:  0.959 
-F-statistic: 128.1 on 14 and 62 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 2.298 on 54 degrees of freedom
+Multiple R-squared:   0.97, Adjusted R-squared:  0.9578 
+F-statistic: 79.42 on 22 and 54 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Y el modelo obtenido con el lambda a una desviación estándar es:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Lassomod1se <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span> PopChng <span class="sc">+</span> Under18P <span class="sc">+</span> AI14P <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                   Oth14P <span class="sc">+</span> NoHS14 <span class="sc">+</span> ClgGrad14 <span class="sc">+</span> Pov200P <span class="sc">+</span> COIave</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                 , <span class="at">data =</span> datosmod1)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lassomod1se)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Lassomod1se <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span> PopChng <span class="sc">+</span> Under18P <span class="sc">+</span> Over21P <span class="sc">+</span> Over65P <span class="sc">+</span> Wht14P <span class="sc">+</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                   AI14P <span class="sc">+</span> AS14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> PropCrRt <span class="sc">+</span> VlntCrRt <span class="sc">+</span> PerCInc14 <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                   NoHS14 <span class="sc">+</span> SmClg14 <span class="sc">+</span> COIave <span class="sc">+</span> SESave <span class="sc">+</span> Hlitave</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                 , <span class="at">data =</span> datosmod1)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lassomod1se)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = HISave ~ PopChng + Under18P + AI14P + Oth14P + NoHS14 + 
-    ClgGrad14 + Pov200P + COIave, data = datosmod1)
+lm(formula = HISave ~ PopChng + Under18P + Over21P + Over65P + 
+    Wht14P + AI14P + AS14P + Hisp14P + PropCrRt + VlntCrRt + 
+    PerCInc14 + NoHS14 + SmClg14 + COIave + SESave + Hlitave, 
+    data = datosmod1)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.8725 -1.8408 -0.2743  1.3721  6.2458 
+-3.6303 -1.6090  0.1162  1.3762  6.7030 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  2.088e+01  2.304e+00   9.064 2.59e-13 ***
-PopChng     -2.136e-01  7.509e-02  -2.844  0.00587 ** 
-Under18P     1.830e-01  7.831e-02   2.337  0.02238 *  
-AI14P       -1.887e+00  6.649e-01  -2.838  0.00598 ** 
-Oth14P       4.715e-02  2.736e-02   1.724  0.08933 .  
-NoHS14       1.168e-04  9.997e-05   1.169  0.24659    
-ClgGrad14   -1.858e-04  3.545e-05  -5.240 1.70e-06 ***
-Pov200P      3.842e-01  3.485e-02  11.023  &lt; 2e-16 ***
-COIave      -3.366e+00  1.649e+00  -2.042  0.04506 *  
+(Intercept)  5.030e+01  2.043e+01   2.462  0.01671 *  
+PopChng     -1.839e-02  8.875e-02  -0.207  0.83656    
+Under18P    -1.243e-01  2.118e-01  -0.587  0.55955    
+Over21P     -3.342e-01  1.965e-01  -1.701  0.09420 .  
+Over65P      1.767e-01  1.084e-01   1.630  0.10838    
+Wht14P      -8.047e-02  1.816e-02  -4.431 4.05e-05 ***
+AI14P       -6.804e-01  7.418e-01  -0.917  0.36274    
+AS14P        1.194e-01  3.688e-02   3.238  0.00196 ** 
+Hisp14P      1.277e-01  2.531e-02   5.044 4.49e-06 ***
+PropCrRt    -1.064e+02  3.075e+01  -3.460  0.00100 ** 
+VlntCrRt     1.702e+02  3.952e+01   4.307 6.23e-05 ***
+PerCInc14   -1.844e-06  1.307e-06  -1.411  0.16340    
+NoHS14       4.705e-04  1.559e-04   3.018  0.00373 ** 
+SmClg14     -2.153e-04  1.580e-04  -1.363  0.17808    
+COIave      -6.068e+00  1.885e+00  -3.219  0.00208 ** 
+SESave      -2.694e-01  1.158e-01  -2.326  0.02344 *  
+Hlitave      1.153e-01  3.715e-02   3.105  0.00290 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 2.464 on 68 degrees of freedom
-Multiple R-squared:  0.9566,    Adjusted R-squared:  0.9515 
-F-statistic: 187.4 on 8 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 2.462 on 60 degrees of freedom
+Multiple R-squared:  0.9618,    Adjusted R-squared:  0.9516 
+F-statistic: 94.35 on 16 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
 </section>
 <section id="correlación-y-multicolinealidad" class="level2">
-<h2 class="anchored" data-anchor-id="correlación-y-multicolinealidad">Correlación y multicolinealidad</h2>
-<p>Para cada uno de los conjuntos de variables elegidas se realizará un <em>pairplot</em> y se calculará el <em>Factor de Inflación de Varianza</em> (VIF) para determinar la multicolinealidad. El conjunto de variables seleccionado para cada uno de los métodos es:</p>
+<h2 class="anchored" data-anchor-id="correlación-y-multicolinealidad">Correlación y Multicolinealidad</h2>
+<p>Para cada uno de los conjuntos de variables elegidas se realizará un <em>pairplot</em> y se calculará el <em>Factor de Inflación de Varianza</em> (VIF) para determinar la multicolinealidad, es importante tener en cuenta que se reportaran correlaciones altas <span class="math inline">\((\rho &gt; 0.7)\)</span> y valores graves de multicolinealidad <span class="math inline">\((VIF &gt; 10)\)</span>. El conjunto de variables seleccionado para cada uno de los métodos es:</p>
 <section id="stepwise-forward-1" class="level3">
 <h3 class="anchored" data-anchor-id="stepwise-forward-1">Stepwise forward</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> datosmod2 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(Pov200P, ClgGrad14, COIave, Oth14, Hlitave, </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                                    AI14P,Pov125P, Pov185P, AS14P, Under18P, </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                    Over65P, PopChng))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(COIave, Over21P, AS14P, Wht14P, Hisp14P,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                    PopMP, Hlitave, AI14P, VlntCrRt, PropCrRt,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                                    SESave, PerCInc14, NoHS14, Oth14P, Blk14P,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                                    ClgGrad14, Over65P))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Con respecto al pairplot se detectan algunas correlaciones altas <span class="math inline">\((&gt; 0.7)\)</span> entre las que se encuentran:</p>
+<p>Con respecto al pairplot se considera importante mencionar que algunas parejas de variables con correlaciones altas son:</p>
 <ul>
-<li><p><strong><em>Pov200P</em></strong> <strong>- <em>COIave</em>:</strong> Con una correlación de <span class="math inline">\(-0.871\)</span>.</p></li>
-<li><p><strong><em>Pov200P - Pov125P y Pov200P - Pov185P:</em></strong> La primera con una correlación de 0.995 y la segunda con <span class="math inline">\(0.997\)</span>.</p></li>
-<li><p><strong><em>Pov125P - COIave y Pov185P - COIave:</em></strong> Con una correlación de <span class="math inline">\(-0.830\)</span> y <span class="math inline">\(-0.868\)</span> respectivamente.</p></li>
-<li><p><strong><em>Under18P - COIave:</em></strong> Con una correlación de <span class="math inline">\(-0.755\)</span>.</p></li>
-<li><p><strong><em>Pov185P - Pov125P:</em></strong> Con una correlación de <span class="math inline">\(0.970\)</span>.</p></li>
+<li><p><strong><em>Over21P</em></strong> <strong>- <em>COIave y SESave - COIave</em>:</strong> Con una correlación de <span class="math inline">\(0.733\)</span> y <span class="math inline">\(0.754\)</span> respectivamente.</p></li>
+<li><p><strong><em>Blk14P - Wht14P y Blk14P - PopMP</em>:</strong> Con una correlación de <span class="math inline">\(-0.921\)</span> y <span class="math inline">\(-0.774\)</span> respectivamente.</p></li>
+<li><p><strong><em>Oth14P - Hisp14P:</em></strong> Con una correlación de <span class="math inline">\(0.894\)</span>.</p></li>
+<li><p><strong><em>ClgGrad14 - PerCInc14P:</em></strong> Con una correlación de <span class="math inline">\(0.959\)</span>.</p></li>
 </ul>
-<p>Es fácil notar que la mayoría de las correlaciones ocurren entre proporciones de pobreza que acumulen cierta cantidad de ingreso, lo cual es esperable, pues las variables se almacenan entre ellas.</p>
 <p>Las correlaciones obtenidas nos dejan con cierto indicio de multicolinealidad que será verificado por medio del VIF.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/pairplotdf1-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Evaluando el VIF se rectifica la sospecha que se tenia de multicolinealidad grave, pues se tienen valores de <span class="math inline">\(VIF &gt; 10\)</span>.</p>
+<p>Evaluando el VIF se rectifica la sospecha que se tenia de multicolinealidad grave.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(forwardmod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in summary.lm(object, ...): essentially perfect fit: summary may be
-unreliable</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(forwardmod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   HISaveP   Under18P      PopMP     Blk14P     SESave Property_C    Over21P 
-  5.136988  20.221107   3.260156   4.324796   2.731938   2.638235  20.449474 
-    Under5 
-  2.361549 </code></pre>
+<pre><code>     COIave     Over21P       AS14P      Wht14P     Hisp14P       PopMP 
+   9.449759    6.891162  215.061656 2148.025006   17.201682    3.472206 
+    Hlitave       AI14P    VlntCrRt    PropCrRt      SESave   PerCInc14 
+   1.240795    1.454021   10.629927    3.374424    5.287132   18.996205 
+     NoHS14      Oth14P      Blk14P   ClgGrad14     Over65P 
+   2.238013  379.747407 3300.188191   25.863242    2.982594 </code></pre>
 </div>
 </div>
 </section>
@@ -690,430 +737,237 @@ unreliable</code></pre>
 <h3 class="anchored" data-anchor-id="regularización-lasso-1">Regularización Lasso</h3>
 <p><em>Para el lambda mínimo:</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng, Under18P, Over65P, Wht14P, AI14P, AS14P, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                                    Oth14P, PerCInc14, NoHS14, ClgGrad14, Pov185P, </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                                    Pov200P, COIave, Hlitave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng , Under5P ,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                                      Under18P , Over21P , Over65P , Wht14P , </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                                      AI14P , AS14P , NHP14P , Oth14P ,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                                      Hisp14P , PropCrRt , VlntCrRt , PerCInc14 ,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                                      NoHS14 , HSGrad14 , SmClg14 , </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                                      ClgGrad14 , LaborFrc , COIave ,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                                      SESave , Hlitave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Con respecto al pairplot, al igual que en el caso anterior, se observan valores altos en la correlación. En estos se encuentran:</p>
 <ul>
-<li><p><strong><em>COIave - Under18P:</em></strong> Con una correlación del <span class="math inline">\(-0.755\)</span>.</p></li>
-<li><p><strong><em>ClgGrad14 - PerCinc14:</em></strong> Con una correlación de <span class="math inline">\(0.954\)</span>.</p></li>
-<li><p><strong><em>Pov200P -</em></strong> <strong><em>Pov185P:</em></strong> Con una correlación de <span class="math inline">\(0.997\)</span>.</p></li>
-<li><p><strong><em>Pov185P - COIave y Pov200P - COIave:</em></strong> Con una correlación de <span class="math inline">\(-0.868\)</span> y <span class="math inline">\(-0.871\)</span> respectivamente.</p></li>
+<li><p><strong><em>Over21P - Under18P, Under18P</em></strong> <strong>- <em>COIave y Over21P</em></strong> <strong>- <em>COIave:</em></strong> Con una correlación del <span class="math inline">\(-0.970\)</span>, <span class="math inline">\(-0.755\)</span> y <span class="math inline">\(0.733\)</span> respectivamente.</p></li>
+<li><p><strong><em>SESave - VlntCrRt:</em></strong> Con una correlación de <span class="math inline">\(-0.762\)</span>.</p></li>
+<li><p><strong><em>LaborFrc - PerCInc14 y ClgGrad14 - PerCInc14P:</em></strong> Con una correlación de <span class="math inline">\(0.848\)</span> y <span class="math inline">\(0.959\)</span>.</p></li>
 </ul>
-<p>Correlaciones que nuevamente puede inducir a resultados de multicolinealidad altos.</p>
+<p>Correlaciones que ya se habían observado en el modelo anterior y que nuevamente pueden inducir a resultados de multicolinealidad altos.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/pairplotdf2-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Evaluando el VIF afirmamos la sospecha y se afirma la presencia de multicolinealidad alta.</p>
+<p>Evaluando el VIF afirmamos la sospecha y se afirma la presencia de multicolinealidad grave.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Lassomodmin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Lassomodmin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   PopChng   Under18P    Over65P     Wht14P      AI14P      AS14P     Oth14P 
-  1.330261   4.686856   2.589903   3.561200   1.339240   1.683619   2.357151 
- PerCInc14     NoHS14  ClgGrad14    Pov185P    Pov200P     COIave    Hlitave 
- 17.549475   2.080432  23.529444 320.452159 320.348678   7.795963   1.270491 </code></pre>
+<pre><code>   PopChng    Under5P   Under18P    Over21P    Over65P     Wht14P      AI14P 
+  1.770716   2.201015  26.633628  27.653105   4.097434   9.910381   1.547105 
+     AS14P     NHP14P     Oth14P    Hisp14P   PropCrRt   VlntCrRt  PerCInc14 
+  2.602513   1.913529  10.754651  21.379650   4.279061  13.233084  25.771130 
+    NoHS14   HSGrad14    SmClg14  ClgGrad14   LaborFrc     COIave     SESave 
+ 13.828615  28.264218  20.220129  91.022144 137.376665  12.588558   6.606602 
+   Hlitave 
+  1.348391 </code></pre>
 </div>
 </div>
-<p><em>Para el lambda a una desviacion estándar:</em></p>
+<p><em>Para el lambda a una desviación estándar:</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng, Under18P, AI14P, Oth14P, NoHS14,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                                    ClgGrad14, Pov200P, COIave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng , Under18P , Over21P , Over65P , Wht14P , </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                                      AI14P , AS14P , Hisp14P , PropCrRt , VlntCrRt , PerCInc14 ,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                                      NoHS14 , SmClg14 , COIave , SESave , Hlitave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Con respecto al pairplot se detectan las siguientes correlaciones altas:</p>
+<p>Con respecto al pairplot se detectan correlaciones altas, entre ellas:</p>
 <ul>
-<li><p><strong><em>COIave - Under18P:</em></strong> Con una correlación de <span class="math inline">\(-0.755\)</span>.</p></li>
-<li><p><strong><em>COIave - Pov200P:</em></strong> Con una correlación de <span class="math inline">\(-0.871\)</span>.</p></li>
+<li><p><strong><em>Over21P - Under18P y COIave - Under18P:</em></strong> Con una correlación del <span class="math inline">\(-0.970\)</span> y <span class="math inline">\(-0.755\)</span> respectivamente.</p></li>
+<li><p><strong><em>SESave - VlntCrRt:</em></strong> Con una correlación de <span class="math inline">\(-0.762\)</span>.</p></li>
 </ul>
-<p><strong><em>Nota:</em></strong> Es importante observar que en cada uno de los métodos utilizados parala selección de variables se obtuvieron estas parejas.</p>
+<p><em><strong>Nota:</strong> Es fácil que las correlaciones altas en algunas parejas son debidas a que se contienen entre ellas, un ejemplo de esto son las variables de edad de la población.</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<p><img src="index_files/figure-html/pairplotdf3-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Evaluando el VIF, observamos que no se tienen multicolinealidad alta, sin embargo, si se tiene presencia de multicolinealidad moderada.</p>
+<p>Evaluando el VIF, nuevamente detectamos valores de multicolinealidad grave.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Lassomod1se)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Lassomod1se)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  PopChng  Under18P     AI14P    Oth14P    NoHS14 ClgGrad14   Pov200P    COIave 
- 1.202716  3.411084  1.080395  1.805828  1.899099  1.993881  4.732889  6.158379 </code></pre>
+<pre><code>  PopChng  Under18P   Over21P   Over65P    Wht14P     AI14P     AS14P   Hisp14P 
+ 1.682485 24.991237 24.744700  2.726072  4.414343  1.347137  1.881323  6.349559 
+ PropCrRt  VlntCrRt PerCInc14    NoHS14   SmClg14    COIave    SESave   Hlitave 
+ 4.092101 12.071596  2.776695  4.624075  3.287301  8.062136  6.136716  1.214194 </code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="modelo-regresión-auxiliar-inicial" class="level2">
-<h2 class="anchored" data-anchor-id="modelo-regresión-auxiliar-inicial">Modelo regresión auxiliar inicial</h2>
-<p>Debido a que nuestra variable respuesta posee un rango limitado entre 0 y 100 al tratarse de un índice, se tomó como alternativa inicial utilizar un modelo de Regresión Beta utilizando las covariables seleccionadas anteriormente a partir del modelo de Regresión Lineal múltiple. A continuación reescalamos la variable para utilizarla adecuadamente, de donde su rango estará en los valores entre 0 y 1.</p>
+<section id="modelo-de-regresión-auxiliar-inicial" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-de-regresión-auxiliar-inicial">Modelo de regresión auxiliar inicial</h2>
+<p>Se decide trabajar con el modelo con lambda a una desviación estándar pues al presentarse multicolinealidad en la data trabajada el método stepwise no es ideal y las variables seleccionadas por la regularización Lasso con el lambda mínimo presentan mayores problemas de multicolinealidad que las seleccionadas por la opción elegida.</p>
+<p>Es necesario solucionar los problemas con los predictores elegidos ¿Cómo se puede hacer esto? Una de las formas es revisar si las interacciones son significativas y la otra es eliminar una de las variables, en este trabajo se va a optar por la segunda opción. De esta forma las variables seleccionadas son:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>datosmod1<span class="sc">$</span>HISaveP <span class="ot">&lt;-</span> datosmod1<span class="sc">$</span>HISave<span class="sc">/</span><span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>De este modo, realizando el ajuste obtenemos que:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mod.beta <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> PopChng <span class="sc">+</span> Under18P <span class="sc">+</span> AI14P <span class="sc">+</span>      </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                              Oth14P <span class="sc">+</span> NoHS14 <span class="sc">+</span> ClgGrad14 <span class="sc">+</span> Pov200P <span class="sc">+</span> COIave</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                            , <span class="at">data =</span> datosmod1) </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod.beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>modnorm <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span> PopChng <span class="sc">+</span> Under18P <span class="sc">+</span> Over65P <span class="sc">+</span> VlntCrRt  <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                   AI14P <span class="sc">+</span> AS14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> PropCrRt <span class="sc">+</span> PerCInc14 <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                   NoHS14 <span class="sc">+</span> SmClg14 <span class="sc">+</span> COIave <span class="sc">+</span> SESave <span class="sc">+</span> Hlitave</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                 , <span class="at">data =</span> datosmod1)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-betareg::betareg(formula = HISaveP ~ PopChng + Under18P + AI14P + Oth14P + 
-    NoHS14 + ClgGrad14 + Pov200P + COIave, data = datosmod1)
+lm(formula = HISave ~ PopChng + Under18P + Over65P + VlntCrRt + 
+    AI14P + AS14P + Hisp14P + PropCrRt + PerCInc14 + NoHS14 + 
+    SmClg14 + COIave + SESave + Hlitave, data = datosmod1)
 
-Quantile residuals:
+Residuals:
     Min      1Q  Median      3Q     Max 
--2.0400 -0.7025 -0.0267  0.6118  2.4394 
+-4.9180 -1.7630 -0.0607  1.4211  9.2618 
 
-Coefficients (mean model with logit link):
-              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -1.182e+00  9.427e-02 -12.542  &lt; 2e-16 ***
-PopChng     -8.704e-03  3.172e-03  -2.744  0.00607 ** 
-Under18P     6.007e-03  3.280e-03   1.831  0.06703 .  
-AI14P       -7.248e-02  2.704e-02  -2.680  0.00736 ** 
-Oth14P       1.885e-03  1.105e-03   1.707  0.08788 .  
-NoHS14       6.798e-06  4.046e-06   1.680  0.09292 .  
-ClgGrad14   -1.086e-05  1.644e-06  -6.604 3.99e-11 ***
-Pov200P      1.621e-02  1.432e-03  11.318  &lt; 2e-16 ***
-COIave      -1.465e-01  6.744e-02  -2.172  0.02984 *  
-
-Phi coefficients (precision model with identity link):
-      Estimate Std. Error z value Pr(&gt;|z|)    
-(phi)   420.83      67.75   6.212 5.24e-10 ***
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.453e+01  1.284e+01   1.131 0.262459    
+PopChng     -3.107e-02  1.056e-01  -0.294 0.769489    
+Under18P     2.022e-01  1.200e-01   1.685 0.097094 .  
+Over65P      2.017e-01  1.217e-01   1.657 0.102563    
+VlntCrRt     2.144e+02  4.437e+01   4.831 9.28e-06 ***
+AI14P       -9.106e-01  8.786e-01  -1.036 0.304000    
+AS14P        1.310e-01  4.389e-02   2.985 0.004059 ** 
+Hisp14P      1.015e-01  2.963e-02   3.426 0.001093 ** 
+PropCrRt    -8.854e+01  3.574e+01  -2.477 0.015995 *  
+PerCInc14   -3.694e-06  1.489e-06  -2.480 0.015876 *  
+NoHS14       5.665e-04  1.848e-04   3.066 0.003216 ** 
+SmClg14     -1.756e-04  1.883e-04  -0.933 0.354432    
+COIave      -7.711e+00  2.219e+00  -3.474 0.000941 ***
+SESave      -2.940e-01  1.381e-01  -2.128 0.037329 *  
+Hlitave      1.161e-01  4.431e-02   2.621 0.011021 *  
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Type of estimator: ML (maximum likelihood)
-Log-likelihood: 180.4 on 10 Df
-Pseudo R-squared: 0.9555
-Number of iterations: 43 (BFGS) + 3 (Fisher scoring) </code></pre>
+Residual standard error: 2.938 on 62 degrees of freedom
+Multiple R-squared:  0.9437,    Adjusted R-squared:  0.931 
+F-statistic: 74.26 on 14 and 62 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Se destacan las complicaciones numéricas implicadas detrás de realizar el ajuste a partir de una Regresión Beta, haciendo la recomendación adicional de trabajar bajo un modelo Gaussiano restringido. Realizando una evaluación de los supuestos de multicolinealidad, normalidad y homocedasticidad:</p>
-<section id="multicolinealidad" class="level3">
-<h3 class="anchored" data-anchor-id="multicolinealidad">Multicolinealidad</h3>
+<p>Y si se realiza nuevamente la revisión del VIF se nota que ya no se tienen los problemas señalados en la parte anterior.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod.beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(modnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  PopChng  Under18P     AI14P    Oth14P    NoHS14 ClgGrad14   Pov200P    COIave 
- 1.209142  3.260992  1.085297  1.822354  1.892107  1.942326  4.405016  5.661456 </code></pre>
+<pre><code>  PopChng  Under18P   Over65P  VlntCrRt     AI14P     AS14P   Hisp14P  PropCrRt 
+ 1.670505  5.630765  2.411354 10.682730  1.326139  1.870005  6.107527  3.880231 
+PerCInc14    NoHS14   SmClg14    COIave    SESave   Hlitave 
+ 2.531208  4.561754  3.275108  7.844664  6.126102  1.212615 </code></pre>
 </div>
 </div>
-</section>
-<section id="homocedasticidad" class="level3">
-<h3 class="anchored" data-anchor-id="homocedasticidad">Homocedasticidad</h3>
+<p>Se procede de esta manera a verificar los supuestos distribucionales y de varianza, para realizar los cambios correspondientes.</p>
+<p><strong><em>Normalidad y homocedasticidad de los residuos.</em></strong></p>
+<p>Para la revisión se decide hacer uso de diversas pruebas: para verificar normalidad se hace uso de la <em>Shapiro Wilk</em> y la prueba <em>Lilliefors</em>; para homocedasticidad se hace uso de la prueba <em>Breusch-Pagan</em>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(mod.beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    studentized Breusch-Pagan test
-
-data:  mod.beta
-BP = 14.78, df = 8, p-value = 0.06356</code></pre>
-</div>
-</div>
-</section>
-<section id="normalidad" class="level3">
-<h3 class="anchored" data-anchor-id="normalidad">Normalidad</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> mod.beta<span class="sc">$</span>residuals  </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(e1) ; <span class="fu">lillie.test</span>(e1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>resnorm <span class="ot">=</span> modnorm<span class="sc">$</span>residuals <span class="do">## Residuos del modelo</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(resnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
-data:  e1
-W = 0.98419, p-value = 0.4559</code></pre>
+data:  resnorm
+W = 0.96956, p-value = 0.06147</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(resnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
-data:  e1
-D = 0.074795, p-value = 0.3566</code></pre>
+data:  resnorm
+D = 0.087213, p-value = 0.1572</code></pre>
 </div>
-</div>
-<p>Por consiguiente, al cumplirse los supuestos de normalidad y homocedasticidad hacemos la re evaluación de la significancia de los coeficientes, haciendo el re ajuste del modelo, obteniendo de este modo el siguiente modelo final.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mod.beta1 <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> PopChng <span class="sc">+</span> ClgGrad14 <span class="sc">+</span> Pov200P <span class="sc">+</span> COIave</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                             , <span class="at">data =</span> datosmod1) </span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod.beta1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-betareg::betareg(formula = HISaveP ~ PopChng + ClgGrad14 + Pov200P + 
-    COIave, data = datosmod1)
-
-Quantile residuals:
-    Min      1Q  Median      3Q     Max 
--2.3031 -0.6102  0.0230  0.6432  2.2432 
-
-Coefficients (mean model with logit link):
-              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -1.076e+00  7.228e-02 -14.892  &lt; 2e-16 ***
-PopChng     -9.178e-03  3.566e-03  -2.574   0.0101 *  
-ClgGrad14   -1.231e-05  1.714e-06  -7.180 6.96e-13 ***
-Pov200P      1.722e-02  1.573e-03  10.950  &lt; 2e-16 ***
-COIave      -1.925e-01  7.164e-02  -2.687   0.0072 ** 
-
-Phi coefficients (precision model with identity link):
-      Estimate Std. Error z value Pr(&gt;|z|)    
-(phi)   305.32      49.13   6.214 5.16e-10 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-
-Type of estimator: ML (maximum likelihood)
-Log-likelihood: 168.1 on 6 Df
-Pseudo R-squared: 0.9387
-Number of iterations: 27 (BFGS) + 3 (Fisher scoring) </code></pre>
-</div>
-</div>
-<p>Verificando y haciendo la re evaluación de supuestos, obtenemos que se cumplen en su mayoría a excepción de la autocorrelación, punto que trataremos más adelante con el ajuste de un Modelo de Regresión Espacial.</p>
-</section>
-<section id="multicolinealidad-1" class="level3">
-<h3 class="anchored" data-anchor-id="multicolinealidad-1">Multicolinealidad</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod.beta1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  PopChng ClgGrad14   Pov200P    COIave 
- 1.110520  1.530977  3.853861  4.641198 </code></pre>
-</div>
-</div>
-</section>
-<section id="normalidad-1" class="level3">
-<h3 class="anchored" data-anchor-id="normalidad-1">Normalidad</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> mod.beta1<span class="sc">$</span>residuals  </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(e2) ;<span class="fu">lillie.test</span>(e2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  e2
-W = 0.98644, p-value = 0.5893</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  e2
-D = 0.064703, p-value = 0.5907</code></pre>
-</div>
-</div>
-</section>
-<section id="homocedasticidad-1" class="level3">
-<h3 class="anchored" data-anchor-id="homocedasticidad-1">Homocedasticidad</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(mod.beta1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(modnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     studentized Breusch-Pagan test
 
-data:  mod.beta1
-BP = 4.3234, df = 4, p-value = 0.364</code></pre>
+data:  modnorm
+BP = 12.299, df = 14, p-value = 0.5823</code></pre>
 </div>
 </div>
-</section>
-<section id="autocorrelación" class="level3">
-<h3 class="anchored" data-anchor-id="autocorrelación">Autocorrelación</h3>
+<p>Se resulta así que con un nivel de confianza al <span class="math inline">\(95%\)</span> se dice que no se tiene evidencia suficiente para decir que los residuos no se distribuyen normalmente y que no son homocedasticos. Tomando esto en cuenta, se retiran las variables no significativas y se tiene el siguiente modelo, del que nuevamente se realizará la revisión de supuestos:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dwtest</span>(mod.beta1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>modnorm <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span> VlntCrRt  <span class="sc">+</span> AS14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>               PropCrRt <span class="sc">+</span> PerCInc14 <span class="sc">+</span> NoHS14 <span class="sc">+</span> COIave <span class="sc">+</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>               SESave <span class="sc">+</span> Hlitave </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>             , <span class="at">data =</span> datosmod1)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Durbin-Watson test
+Call:
+lm(formula = HISave ~ VlntCrRt + AS14P + Hisp14P + PropCrRt + 
+    PerCInc14 + NoHS14 + COIave + SESave + Hlitave, data = datosmod1)
 
-data:  mod.beta1
-DW = 1.516, p-value = 0.01184
-alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.5901 -1.9444  0.0478  1.5499  9.8785 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.919e+01  1.147e+01   1.673 0.099060 .  
+VlntCrRt     2.385e+02  3.989e+01   5.979 9.63e-08 ***
+AS14P        1.124e-01  3.955e-02   2.843 0.005920 ** 
+Hisp14P      1.098e-01  2.316e-02   4.741 1.15e-05 ***
+PropCrRt    -1.237e+02  2.973e+01  -4.159 9.29e-05 ***
+PerCInc14   -5.808e-06  1.159e-06  -5.012 4.18e-06 ***
+NoHS14       4.167e-04  1.195e-04   3.486 0.000870 ***
+COIave      -8.316e+00  2.113e+00  -3.936 0.000199 ***
+SESave      -3.386e-01  1.133e-01  -2.989 0.003910 ** 
+Hlitave      1.360e-01  4.267e-02   3.188 0.002180 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.976 on 67 degrees of freedom
+Multiple R-squared:  0.9376,    Adjusted R-squared:  0.9293 
+F-statistic: 111.9 on 9 and 67 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Por lo tanto podemos observar que el modelo auxiliar definitivo corresponde a:</p>
-<div class="math-small">
-<p><span class="math display">\[
-Y_i \sim Beta(\mu_i,\phi)
-\]</span></p>
-<p><span class="math display">\[
-logit(\mu_i) = -1.076 - 9.18e^{-3}PopChng - 1.23e^{-5}ClgGrad14 + 1.72e^{-2}Pov200P - 1.93e^{-1}COIave
-\]</span></p>
-</div>
-</section>
-</section>
-<section id="matriz-w-e-indice-de-moran-i" class="level2">
-<h2 class="anchored" data-anchor-id="matriz-w-e-indice-de-moran-i">Matriz W e Indice de Moran I</h2>
-<p>Para encontrar la matriz de pesos espaciales <span class="math inline">\(W\)</span>, se hizo uso del indice de moran. De esta forma el procedimiento correspondia a:</p>
-<ol type="1">
-<li><p>Determinar y gráficar los centroides y coordenadas.</p>
+<p><strong><em>Normalidad y homocedasticidad de los residuos.</em></strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>xy0 <span class="ot">=</span> coords</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>trinb<span class="ot">=</span><span class="fu">tri2nb</span>(xy0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">main =</span> <span class="st">"Chicago community areas"</span>)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(coords, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
-</figure>
-</div>
-</div>
-</div></li>
-<li><p>Calcular la matriz <span class="math inline">\(W\)</span> por distintos criterios (Torre, Reina, Vecinos) para la variable de interés.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Torre</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>rook_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>rook_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Reina</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>queen_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>queen_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Criterio Vecinos</span></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>tri_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>tri_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>soi_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>soi_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>relative_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,</span>
-<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>relative_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,</span>
-<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>gabriel_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,</span>
-<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>gabriel_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,</span>
-<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a>knn1_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a>knn1_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a>knn2_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a>knn2_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-30"><a href="#cb50-30" aria-hidden="true" tabindex="-1"></a>knn3_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-31"><a href="#cb50-31" aria-hidden="true" tabindex="-1"></a>knn3_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a>knn4_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a>knn4_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Para los <em>graph neigbours</em> se puede observar la siguiente gráfica:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1. </span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Delaunay triangulation"</span>)</span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(trinb,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="co">#2.</span></span>
-<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"SOI graph"</span>)</span>
-<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(soi_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"green"</span>)</span>
-<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a><span class="co">#3.</span></span>
-<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gabriel graph"</span>)</span>
-<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gabriel_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a><span class="co">#4.</span></span>
-<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(ComChicago),</span>
-<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"grey"</span>,</span>
-<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Relative neighborhood graph"</span>)</span>
-<span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(relative_nb_b,xy0,<span class="at">add=</span>T,<span class="at">col=</span><span class="st">"yellow"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
-</figure>
-</div>
-</div>
-</div></li>
-<li><p>Realizar la prueba de Moran y seleccionar la de menor <span class="math inline">\(valor-p\)</span>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">=</span><span class="fu">list</span>(<span class="st">"Torre_B"</span> <span class="ot">=</span> rook_nb_b,<span class="st">"Torre_W"</span> <span class="ot">=</span> rook_nb_w,</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Reina_B"</span> <span class="ot">=</span> queen_nb_b,<span class="st">"Reina_W"</span> <span class="ot">=</span> queen_nb_w,</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Tri_B"</span> <span class="ot">=</span> tri_nb_b,<span class="st">"Tri_W"</span> <span class="ot">=</span> tri_nb_w,</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Soi_B"</span> <span class="ot">=</span> soi_nb_b, <span class="st">"Soi_W"</span> <span class="ot">=</span> soi_nb_w,</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Gabriel_B"</span> <span class="ot">=</span> gabriel_nb_b,<span class="st">"Gabriel_W"</span> <span class="ot">=</span> gabriel_nb_w,</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Relative_B"</span> <span class="ot">=</span> relative_nb_b,<span class="st">"Relative_W"</span> <span class="ot">=</span> relative_nb_w,</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn1_B"</span> <span class="ot">=</span> knn1_nb_b,<span class="st">"knn1_W"</span> <span class="ot">=</span> knn1_nb_w,</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn2_B"</span> <span class="ot">=</span> knn2_nb_b,<span class="st">"knn2_W"</span> <span class="ot">=</span> knn2_nb_w,</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn3_B"</span> <span class="ot">=</span> knn3_nb_b, <span class="st">"knn3_W"</span> <span class="ot">=</span> knn3_nb_w,</span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn4_B"</span> <span class="ot">=</span> knn4_nb_b, <span class="st">"knn4_W"</span> <span class="ot">=</span> knn4_nb_w)</span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">=</span><span class="fu">numeric</span>(<span class="dv">0</span>)</span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mat)){</span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[i]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>IMtest <span class="ot">=</span> <span class="fu">moran.test</span>(ComChicago<span class="sc">$</span>HISaveP, mat[[<span class="fu">which.min</span>(aux)]], </span>
-<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></li>
-</ol>
-<p>De modo que la matriz <span class="math inline">\(W\)</span> con menor <span class="math inline">\(valor-p\)</span> es:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La matriz W seleccionada es"</span>, <span class="fu">names</span>(mat)[<span class="fu">which.min</span>(aux)], </span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"con un pvalor de"</span>, IMtest<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>resnorm <span class="ot">=</span> modnorm<span class="sc">$</span>residuals <span class="do">## Residuos del modelo</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(resnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>La matriz W seleccionada es Torre_B con un pvalor de 1.771052e-15</code></pre>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  resnorm
+W = 0.97521, p-value = 0.137</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(resnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  resnorm
+D = 0.068634, p-value = 0.4948</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(modnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  modnorm
+BP = 10.023, df = 9, p-value = 0.3486</code></pre>
 </div>
 </div>
-<p>Y de esta forma:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.plot</span>(datos<span class="sc">$</span>HISaveP, </span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>           rook_nb_b, </span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">labels=</span><span class="fu">as.character</span>(datos<span class="sc">$</span>community), </span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab=</span><span class="st">"IPE promedio"</span>, </span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylab=</span><span class="st">"IPE promedio rezagado"</span>, </span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">las=</span><span class="dv">1</span>, </span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">pch=</span><span class="dv">16</span>, </span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">cex=</span><span class="fl">0.5</span>)</span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, </span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Valor P: 1.771052e-15"</span>), </span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="dv">1</span>,</span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">bg=</span><span class="st">'lightgreen'</span>)</span>
-<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Dispersograma de Moran para el Índice de Privación Económica promedio</span></span>
-<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="st">      en Chicago (2014)"</span>, <span class="at">cex.main=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" style="width:120.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>Se resulta así que con un nivel de confianza al <span class="math inline">\(95%\)</span> se dice que no se tiene evidencia suficiente para decir que los residuos no se distribuyen normalmente y que no son homocedasticos. Siendo este nuestro modelo auxiliar final.</p>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
