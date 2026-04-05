@@ -172,7 +172,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#selección-de-variables" id="toc-selección-de-variables" class="nav-link" data-scroll-target="#selección-de-variables">Selección de variables</a>
   <ul class="collapse">
-  <li><a href="#stepwise-forward" id="toc-stepwise-forward" class="nav-link" data-scroll-target="#stepwise-forward">Stepwise forward:</a></li>
+  <li><a href="#stepwise-forward" id="toc-stepwise-forward" class="nav-link" data-scroll-target="#stepwise-forward">Stepwise forward</a></li>
   <li><a href="#regularización-lasso" id="toc-regularización-lasso" class="nav-link" data-scroll-target="#regularización-lasso">Regularización Lasso</a></li>
   </ul></li>
   <li><a href="#correlación-y-multicolinealidad" id="toc-correlación-y-multicolinealidad" class="nav-link" data-scroll-target="#correlación-y-multicolinealidad">Correlación y Multicolinealidad</a>
@@ -190,8 +190,13 @@ window.Quarto = {
   <li><a href="#regularización-lasso-2" id="toc-regularización-lasso-2" class="nav-link" data-scroll-target="#regularización-lasso-2">Regularización Lasso</a></li>
   </ul></li>
   <li><a href="#correlación-y-multicolinealidad-1" id="toc-correlación-y-multicolinealidad-1" class="nav-link" data-scroll-target="#correlación-y-multicolinealidad-1">Correlación y Multicolinealidad</a></li>
+  <li><a href="#modelo-de-regresión-auxiliar-inicial-1" id="toc-modelo-de-regresión-auxiliar-inicial-1" class="nav-link" data-scroll-target="#modelo-de-regresión-auxiliar-inicial-1">Modelo de regresión auxiliar inicial</a></li>
   </ul></li>
-  <li><a href="#indice-de-moran-y-matriz-w" id="toc-indice-de-moran-y-matriz-w" class="nav-link" data-scroll-target="#indice-de-moran-y-matriz-w">Indice de Moran y matriz W</a></li>
+  <li><a href="#indice-de-moran-y-matriz-w" id="toc-indice-de-moran-y-matriz-w" class="nav-link" data-scroll-target="#indice-de-moran-y-matriz-w">Indice de Moran y matriz W</a>
+  <ul class="collapse">
+  <li><a href="#modelo-auxiliar-normal" id="toc-modelo-auxiliar-normal" class="nav-link" data-scroll-target="#modelo-auxiliar-normal">Modelo Auxiliar Normal</a></li>
+  <li><a href="#modelo-auxiliar-beta" id="toc-modelo-auxiliar-beta" class="nav-link" data-scroll-target="#modelo-auxiliar-beta">Modelo Auxiliar Beta</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -477,28 +482,31 @@ window.Quarto = {
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>Y <span class="ot">=</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(ComChicago))[,<span class="dv">2</span>]</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">=</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(ComChicago))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> ComChicago<span class="sc">$</span>PrenScrn</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>q <span class="ot">=</span> <span class="fu">quantile</span>(x, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>iqr <span class="ot">=</span> <span class="fu">IQR</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>xy0 <span class="ot">=</span> coords</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>trinb<span class="ot">=</span><span class="fu">tri2nb</span>(xy0)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> ComChicago<span class="sc">$</span>PrenScrn</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">=</span> q[<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">=</span> q[<span class="dv">3</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>q <span class="ot">=</span> <span class="fu">quantile</span>(x, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>iqr <span class="ot">=</span> <span class="fu">IQR</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ComChicago<span class="sc">$</span>boxcat <span class="ot">=</span> <span class="fu">cut</span>(</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  x,</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, lower, q[<span class="dv">1</span>], q[<span class="dv">2</span>], q[<span class="dv">3</span>], upper, <span class="cn">Inf</span>),</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lower outlier"</span>,</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q1"</span>,</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q1–Median"</span>,</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Median–Q3"</span>,</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q3"</span>,</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Upper outlier"</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"lightblue"</span>, <span class="st">"white"</span>, <span class="st">"pink"</span>, <span class="st">"red"</span>, <span class="st">"darkred"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">=</span> q[<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">=</span> q[<span class="dv">3</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ComChicago<span class="sc">$</span>boxcat <span class="ot">=</span> <span class="fu">cut</span>(</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  x,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, lower, q[<span class="dv">1</span>], q[<span class="dv">2</span>], q[<span class="dv">3</span>], upper, <span class="cn">Inf</span>),</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lower outlier"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q1"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q1–Median"</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Median–Q3"</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q3"</span>,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Upper outlier"</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"lightblue"</span>, <span class="st">"white"</span>, <span class="st">"pink"</span>, <span class="st">"red"</span>, <span class="st">"darkred"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ComChicago) <span class="sc">+</span></span>
@@ -554,7 +562,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="selección-de-variables">Selección de variables</h2>
 <p>Para la selección de variables se hizo uso del stepwise forward y de la regularización Lasso. El primero de ellos parte del modelo nulo y construye el modelo final a partir de una métrica de validación; y el segundo incluye una personalización que fuerza que algunos coeficientes de los predictores tiendan a cero.</p>
 <section id="stepwise-forward" class="level3">
-<h3 class="anchored" data-anchor-id="stepwise-forward">Stepwise forward:</h3>
+<h3 class="anchored" data-anchor-id="stepwise-forward">Stepwise forward</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#:: Modelo completo:</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>modcomp <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span>. , <span class="at">data =</span> datosmod1)</span>
@@ -942,37 +950,36 @@ BP = 12.299, df = 14, p-value = 0.5823</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>modnorm <span class="ot">=</span> <span class="fu">lm</span>(HISave <span class="sc">~</span> VlntCrRt  <span class="sc">+</span> AS14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>               PropCrRt <span class="sc">+</span> PerCInc14 <span class="sc">+</span> NoHS14 <span class="sc">+</span> COIave <span class="sc">+</span> </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>               SESave <span class="sc">+</span> Hlitave </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>               SESave <span class="sc">+</span> Hlitave <span class="sc">-</span> <span class="dv">1</span> </span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>             , <span class="at">data =</span> datosmod1)</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = HISave ~ VlntCrRt + AS14P + Hisp14P + PropCrRt + 
-    PerCInc14 + NoHS14 + COIave + SESave + Hlitave, data = datosmod1)
+    PerCInc14 + NoHS14 + COIave + SESave + Hlitave - 1, data = datosmod1)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--5.5901 -1.9444  0.0478  1.5499  9.8785 
+   Min     1Q Median     3Q    Max 
+-5.638 -1.938 -0.058  1.861  9.638 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  1.919e+01  1.147e+01   1.673 0.099060 .  
-VlntCrRt     2.385e+02  3.989e+01   5.979 9.63e-08 ***
-AS14P        1.124e-01  3.955e-02   2.843 0.005920 ** 
-Hisp14P      1.098e-01  2.316e-02   4.741 1.15e-05 ***
-PropCrRt    -1.237e+02  2.973e+01  -4.159 9.29e-05 ***
-PerCInc14   -5.808e-06  1.159e-06  -5.012 4.18e-06 ***
-NoHS14       4.167e-04  1.195e-04   3.486 0.000870 ***
-COIave      -8.316e+00  2.113e+00  -3.936 0.000199 ***
-SESave      -3.386e-01  1.133e-01  -2.989 0.003910 ** 
-Hlitave      1.360e-01  4.267e-02   3.188 0.002180 ** 
+            Estimate Std. Error t value Pr(&gt;|t|)    
+VlntCrRt   2.479e+02  4.002e+01   6.194 3.89e-08 ***
+AS14P      1.165e-01  3.999e-02   2.914  0.00483 ** 
+Hisp14P    1.077e-01  2.343e-02   4.598 1.91e-05 ***
+PropCrRt  -1.257e+02  3.010e+01  -4.178 8.59e-05 ***
+PerCInc14 -5.553e-06  1.164e-06  -4.771 1.01e-05 ***
+NoHS14     4.153e-04  1.211e-04   3.429  0.00103 ** 
+COIave    -9.233e+00  2.067e+00  -4.467 3.07e-05 ***
+SESave    -2.527e-01  1.023e-01  -2.470  0.01602 *  
+Hlitave    1.938e-01  2.539e-02   7.632 1.02e-10 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 2.976 on 67 degrees of freedom
-Multiple R-squared:  0.9376,    Adjusted R-squared:  0.9293 
-F-statistic: 111.9 on 9 and 67 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.015 on 68 degrees of freedom
+Multiple R-squared:  0.9955,    Adjusted R-squared:  0.9949 
+F-statistic:  1673 on 9 and 68 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p><strong><em>Normalidad y homocedasticidad de los residuos.</em></strong></p>
@@ -985,7 +992,7 @@ F-statistic: 111.9 on 9 and 67 DF,  p-value: &lt; 2.2e-16</code></pre>
     Shapiro-Wilk normality test
 
 data:  resnorm
-W = 0.97521, p-value = 0.137</code></pre>
+W = 0.98089, p-value = 0.3</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(resnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -993,7 +1000,7 @@ W = 0.97521, p-value = 0.137</code></pre>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  resnorm
-D = 0.068634, p-value = 0.4948</code></pre>
+D = 0.051169, p-value = 0.8875</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(modnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1001,7 +1008,7 @@ D = 0.068634, p-value = 0.4948</code></pre>
     studentized Breusch-Pagan test
 
 data:  modnorm
-BP = 10.023, df = 9, p-value = 0.3486</code></pre>
+BP = 9.1944, df = 8, p-value = 0.3262</code></pre>
 </div>
 </div>
 <p>Resulta así que con un nivel de confianza al <span class="math inline">\(95%\)</span> se dice que no se tiene evidencia suficiente para decir que los residuos no se distribuyen normalmente y que no son homocedásticos. Siendo este nuestro modelo auxiliar final.</p>
@@ -1023,47 +1030,27 @@ BP = 10.023, df = 9, p-value = 0.3486</code></pre>
 <p>De modo que las variables seleccionadas son:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SBmodbet)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>SelectBoost beta summary
-Selector: betareg_step_aic
-Resamples per threshold: 100
-Interval mode: none
-c0 grid: 1.000, 0.672, 0.442, 0.363, 0.283, 0.222, 0.179, 0.123, 0.084, 0.053, 0.000
-Inner thresholds: 0.672, 0.442, 0.363, 0.283, 0.222, 0.179, 0.123, 0.084, 0.053
-Top rows:
-   c0 variable frequency
-1   1  Pop2014      0.06
-2   1  PopChng      0.03
-3   1    PopMP      0.07
-4   1    PopFP      0.06
-5   1  Under5P      0.08
-6   1 Under18P      0.04
-7   1  Over18P      0.05
-8   1  Over21P      0.05
-9   1  Over65P      0.08
-10  1   Wht14P      0.07</code></pre>
-</div>
 </div>
 <p>Es importante notar que las frecuencias de selección de las variables son menores iguales a <span class="math inline">\(0.1\)</span> por lo que la aparición de estas variables en las <span class="math inline">\(100\)</span> repeticiones es de máximo <span class="math inline">\(10\)</span> veces, y por tanto ninguna variable es seleccionada por este método, cosa que puede ser debida a la alta multicolinealidad de los datos trabajados.</p>
 </section>
 <section id="regularización-lasso-2" class="level3">
 <h3 class="anchored" data-anchor-id="regularización-lasso-2">Regularización Lasso</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>Lassomodbet <span class="ot">&lt;-</span> <span class="fu">betareg_glmnet</span>(</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">model.matrix</span>(HISaveP <span class="sc">~</span> ., datosmod2)[, <span class="sc">-</span><span class="dv">1</span>],</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> datosmod2<span class="sc">$</span>HISaveP</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>Lassomodbet <span class="ot">&lt;-</span> <span class="fu">betareg_glmnet</span>(</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">model.matrix</span>(HISaveP <span class="sc">~</span> ., datosmod2)[, <span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> datosmod2<span class="sc">$</span>HISaveP</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>De modo que el modelo obtenido es aquel en el que los predictores tienen un valor asociado distinto a cero, y así:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>variables_seleccionadas <span class="ot">&lt;-</span> Lassomodbet[Lassomodbet <span class="sc">!=</span> <span class="dv">0</span>]</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>Lassomodbet <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> PopChng <span class="sc">+</span> PopMP <span class="sc">+</span> Over21P <span class="sc">+</span> Over65P <span class="sc">+</span> </span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>                                 Wht14P <span class="sc">+</span> AI14P <span class="sc">+</span> AS14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> </span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>                                 PropCrRt <span class="sc">+</span> VlntCrRt <span class="sc">+</span> PerCInc14 <span class="sc">+</span> NoHS14 <span class="sc">+</span> </span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>                                 SmClg14 <span class="sc">+</span> COIave <span class="sc">+</span> SESave <span class="sc">+</span> Hlitave, </span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">data =</span> datosmod2)</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lassomodbet)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>variables_seleccionadas <span class="ot">&lt;-</span> Lassomodbet[Lassomodbet <span class="sc">!=</span> <span class="dv">0</span>]</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>Lassomodbet <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> PopChng <span class="sc">+</span> PopMP <span class="sc">+</span> Over21P <span class="sc">+</span> Over65P <span class="sc">+</span> </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>                                 Wht14P <span class="sc">+</span> AI14P <span class="sc">+</span> AS14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>                                 PropCrRt <span class="sc">+</span> VlntCrRt <span class="sc">+</span> PerCInc14 <span class="sc">+</span> NoHS14 <span class="sc">+</span> </span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>                                 SmClg14 <span class="sc">+</span> COIave <span class="sc">+</span> SESave <span class="sc">+</span> Hlitave, </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">data =</span> datosmod2)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lassomodbet)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1113,16 +1100,216 @@ Number of iterations: 38 (BFGS) + 2 (Fisher scoring) </code></pre>
 <section id="correlación-y-multicolinealidad-1" class="level2">
 <h2 class="anchored" data-anchor-id="correlación-y-multicolinealidad-1">Correlación y Multicolinealidad</h2>
 <p>Debido a lo expuesto anteriormente con el método de selección <strong>SelectBoost</strong> se trabajará únicamente con las variables obtenidas por medio de la regularización Lasso.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df4 <span class="ot">=</span> datosmod2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(PopChng , PopMP , Over21P , Over65P , </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                             Wht14P , AI14P , AS14P , NHP14P , Hisp14P , </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                             PropCrRt , VlntCrRt , PerCInc14 , NoHS14 , </span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                             SmClg14 , COIave , SESave , Hlitave)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Con respecto al pairplot se considera importante mencionar la correlación de mayor valor, de modo que:</p>
+<ul>
+<li><strong><em>VlntCrRt - Wht14P</em>:</strong> Con una correlación de <span class="math inline">\(-0.821\)</span>.</li>
+</ul>
+<p>Las correlaciones obtenidas nos dejan con cierto indicio de multicolinealidad que será verificado por medio del VIF.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Lassomodbet)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PopChng     PopMP   Over21P   Over65P    Wht14P     AI14P     AS14P    NHP14P 
+ 1.637305  3.779948  5.974722  2.829963  5.280581  1.359966  2.231344  1.620173 
+  Hisp14P  PropCrRt  VlntCrRt PerCInc14    NoHS14   SmClg14    COIave    SESave 
+ 7.081850  3.573677 11.817854  2.656081  5.353940  3.649462  7.602947  6.204513 
+  Hlitave 
+ 1.210276 </code></pre>
+</div>
+</div>
+<p>Evaluando el VIF, nuevamente detectamos valores de multicolinealidad grave que se deben de solucionar antes de proceder con la revisión de supuestos.</p>
+</section>
+<section id="modelo-de-regresión-auxiliar-inicial-1" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-de-regresión-auxiliar-inicial-1">Modelo de regresión auxiliar inicial</h2>
+<p>En este caso al no ser seleccionadas variables con el primero de los métodos, se utilizan los predictores elegidos con la regularización Lasso realizada, tomando en cuenta que esta tiene problemas de multicolinealidad grave, por lo que al igual que en el caso anterior se retirara una de las variables. De este modo el modelo con el que se va a trabajar es el siguiente.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>modbeta <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> PopChng <span class="sc">+</span> PopMP <span class="sc">+</span> Over21P <span class="sc">+</span> Over65P <span class="sc">+</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>                                 AI14P <span class="sc">+</span> AS14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                                 PropCrRt <span class="sc">+</span> Wht14P <span class="sc">+</span> PerCInc14 <span class="sc">+</span> NoHS14 <span class="sc">+</span> </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>                                 SmClg14 <span class="sc">+</span> COIave <span class="sc">+</span> SESave <span class="sc">+</span> Hlitave, </span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">data =</span> datosmod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Del que si se revisa nuevamente los valores del VIF determinamos que no hay multicolinealidad grave.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(modbeta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PopChng     PopMP   Over21P   Over65P     AI14P     AS14P    NHP14P   Hisp14P 
+ 1.486158  3.554758  5.404429  2.839442  1.356422  2.151621  1.607334  5.716070 
+ PropCrRt    Wht14P PerCInc14    NoHS14   SmClg14    COIave    SESave   Hlitave 
+ 1.995223  4.749278  2.648368  5.340497  3.587046  6.705586  6.047489  1.204442 </code></pre>
+</div>
+</div>
+<p>Se procede de esta manera a verificar los supuestos distribucionales y de varianza, para realizar los cambios correspondientes.</p>
+<p><strong><em>Normalidad y homocedasticidad de los residuos.</em></strong></p>
+<p>Para la revisión se decide hacer uso de diversas pruebas: para verificar normalidad se hace uso de la <em>Shapiro Wilk</em> y la prueba <em>Lilliefors</em>; para homocedasticidad se hace uso de la prueba <em>Breusch-Pagan</em>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>resbeta <span class="ot">=</span> modbeta<span class="sc">$</span>residuals</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(resbeta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  resbeta
+W = 0.97647, p-value = 0.1637</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(resbeta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  resbeta
+D = 0.082437, p-value = 0.2199</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(modbeta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  modbeta
+BP = 17.247, df = 16, p-value = 0.3698</code></pre>
+</div>
+</div>
+<p>Resulta así que con un nivel de confianza al <span class="math inline">\(95%\)</span> se dice que no se tiene evidencia suficiente para decir que los residuos no se distribuyen normalmente y que no son homocedásticos. Tomando esto en cuenta, se retiran las variables no significativas y se tiene el siguiente modelo, del que nuevamente se realizará la revisión de supuestos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>modbeta <span class="ot">=</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(HISaveP <span class="sc">~</span> Wht14P <span class="sc">+</span> Over21P <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                             AS14P <span class="sc">+</span> Hisp14P <span class="sc">+</span> PropCrRt <span class="sc">+</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>                             PerCInc14 <span class="sc">+</span> NoHS14 <span class="sc">+</span> COIave <span class="sc">+</span> </span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>                             Hlitave <span class="sc">+</span> SESave, <span class="at">data =</span> datosmod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong><em>Normalidad y homocedasticidad de los residuos.</em></strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>resbeta <span class="ot">=</span> modbeta<span class="sc">$</span>residuals</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(resbeta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  resbeta
+W = 0.98835, p-value = 0.7116</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(resbeta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  resbeta
+D = 0.073774, p-value = 0.3781</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(modbeta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  modbeta
+BP = 11.845, df = 10, p-value = 0.2956</code></pre>
+</div>
+</div>
+<p>Resulta así que con un nivel de confianza al <span class="math inline">\(95%\)</span> se dice que no se tiene evidencia suficiente para decir que los residuos no se distribuyen normalmente y que no son homocedásticos. Siendo este nuestro modelo auxiliar final.</p>
 </section>
 </section>
 <section id="indice-de-moran-y-matriz-w" class="level1">
-
+<h1>Indice de Moran y matriz W</h1>
+<p>Anteriormente determinamos los dos modelos auxiliares con los que se va a estar trabajando. Para cada uno de ellos se va a determinar la matriz <span class="math inline">\(W\)</span> <strong>AQUI ESTO PUEDE CAMBAIR</strong> por medio del indice de Moran.</p>
+<p>En este caso se trabajaran los siguientes tipos:</p>
+<ul>
+<li><p><strong><em>Basadas en adyacencia:</em></strong> En el que se asume que los vecinos son aquellos que comparten una frontera. Puede ser torre o reina.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>rook_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>rook_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">FALSE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>queen_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>queen_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">poly2nb</span>(ComChicago,<span class="at">queen=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+<li><p><strong><em>Basadas en k vecinos más cercanos:</em></strong> Basado en la distancia que los separa.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>knn1_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>knn1_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">1</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>knn2_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>knn2_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">2</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>knn3_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>knn3_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">3</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>knn4_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>knn4_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">knn2nb</span>(<span class="fu">knearneigh</span>(xy0, <span class="at">k =</span> <span class="dv">4</span>)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+<li><p><strong><em>Basadas en distancia:</em></strong> Definidas por medio de la consideración de áreas vecinas que están en cierta distancia.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>tri_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>tri_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">tri2nb</span>(xy0), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>soi_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"B"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>soi_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">soi.graph</span>(trinb,xy0)), <span class="at">style=</span><span class="st">"W"</span>,<span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>relative_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>relative_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">relativeneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>gabriel_nb_b<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"B"</span>,</span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>gabriel_nb_w<span class="ot">=</span><span class="fu">nb2listw</span>(<span class="fu">graph2nb</span>(<span class="fu">gabrielneigh</span>(xy0), <span class="at">sym=</span><span class="cn">TRUE</span>), <span class="at">style=</span><span class="st">"W"</span>,</span>
+<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>                      <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+</ul>
+<p>Para las que luego se calcula el indice de Moran y se selecciona la matriz que genere el menor <span class="math inline">\(valorp\)</span>. Veamos así que:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">=</span><span class="fu">list</span>(<span class="st">"Torre_B"</span> <span class="ot">=</span> rook_nb_b,<span class="st">"Torre_W"</span> <span class="ot">=</span> rook_nb_w,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Reina_B"</span> <span class="ot">=</span> queen_nb_b,<span class="st">"Reina_W"</span> <span class="ot">=</span> queen_nb_w,</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Tri_B"</span> <span class="ot">=</span> tri_nb_b,<span class="st">"Tri_W"</span> <span class="ot">=</span> tri_nb_w,</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Soi_B"</span> <span class="ot">=</span> soi_nb_b, <span class="st">"Soi_W"</span> <span class="ot">=</span> soi_nb_w,</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Gabriel_B"</span> <span class="ot">=</span> gabriel_nb_b,<span class="st">"Gabriel_W"</span> <span class="ot">=</span> gabriel_nb_w,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Relative_B"</span> <span class="ot">=</span> relative_nb_b,<span class="st">"Relative_W"</span> <span class="ot">=</span> relative_nb_w,</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn1_B"</span> <span class="ot">=</span> knn1_nb_b,<span class="st">"knn1_W"</span> <span class="ot">=</span> knn1_nb_w,</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn2_B"</span> <span class="ot">=</span> knn2_nb_b,<span class="st">"knn2_W"</span> <span class="ot">=</span> knn2_nb_w,</span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn3_B"</span> <span class="ot">=</span> knn3_nb_b, <span class="st">"knn3_W"</span> <span class="ot">=</span> knn3_nb_w,</span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn4_B"</span> <span class="ot">=</span> knn4_nb_b, <span class="st">"knn4_W"</span> <span class="ot">=</span> knn4_nb_w)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="modelo-auxiliar-normal" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-auxiliar-normal">Modelo Auxiliar Normal</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">=</span><span class="fu">numeric</span>(<span class="dv">0</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mat)){</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(resnorm, mat[[i]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>IMtest <span class="ot">=</span> <span class="fu">moran.test</span>(resnorm, mat[[<span class="fu">which.min</span>(aux)]], </span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La matriz W seleccionada es"</span>, <span class="fu">names</span>(mat)[<span class="fu">which.min</span>(aux)], </span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"con un pvalor de"</span>, IMtest<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>La matriz W seleccionada es Relative_B con un pvalor de 0.04117544</code></pre>
+</div>
+</div>
+</section>
+<section id="modelo-auxiliar-beta" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-auxiliar-beta">Modelo Auxiliar Beta</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>aux<span class="ot">=</span><span class="fu">numeric</span>(<span class="dv">0</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mat)){</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  aux[i]<span class="ot">=</span><span class="fu">moran.test</span>(resbeta, mat[[i]], <span class="at">alternative=</span><span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>IMtest <span class="ot">=</span> <span class="fu">moran.test</span>(resbeta, mat[[<span class="fu">which.min</span>(aux)]], </span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"La matriz W seleccionada es"</span>, <span class="fu">names</span>(mat)[<span class="fu">which.min</span>(aux)], </span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"con un pvalor de"</span>, IMtest<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>La matriz W seleccionada es Relative_B con un pvalor de 0.04297169</code></pre>
+</div>
+</div>
 
 
 
 </section>
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Indice de Moran y matriz W</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-aouadi2020selectboost" class="csl-entry" role="listitem">
 Aouadi, Ismaïl, Nicolas Jung, Frédéric Bertrand, et al. 2021. <span>“selectBoost: A General Algorithm to Enhance the Performance of Variable Selection Methods.”</span> <em>Bioinformatics</em> 37 (11): 1507–13. <a href="https://doi.org/10.1093/bioinformatics/btaa855">https://doi.org/10.1093/bioinformatics/btaa855</a>.
 </div>
