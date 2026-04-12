@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Modelamiento de la proporción de pobreza para 2014 en chicago utilizando regresión espacial – Estadística Espacial</title>
+<title>Modelación de la proporción de pobreza para 2014 en chicago utilizando regresión espacial – Estadística Espacial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -224,7 +224,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Modelamiento de la proporción de pobreza para 2014 en chicago utilizando regresión espacial</h1>
+<h1 class="title">Modelación de la proporción de pobreza para 2014 en chicago utilizando regresión espacial</h1>
 </div>
 
 
@@ -295,7 +295,7 @@ window.Quarto = {
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>datosmod1 <span class="ot">=</span> datos1[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>datosmod1<span class="sc">$</span>Pov14P <span class="ot">&lt;-</span> datos<span class="sc">$</span>Pov14<span class="sc">/</span>datos<span class="sc">$</span>Pop2014</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>dfmod1 <span class="ot">&lt;-</span> datosmod1[,<span class="sc">-</span><span class="dv">30</span>] <span class="co"># Data que o incluye la variable de interés</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>dfmod1 <span class="ot">&lt;-</span> datosmod1[,<span class="sc">-</span><span class="dv">32</span>] <span class="co"># Data que no incluye la variable de interés</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Es importante subir el archivo <em>.shp</em> y definir las coordenadas,pues este nos permite generar mapas y es necesario para el calculo de la matriz <span class="math inline">\(W\)</span>. De esta forma:</p>
 <div class="cell">
@@ -320,10 +320,10 @@ window.Quarto = {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="sc">~</span>Pov14P,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"box"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Proporción de personas en pobreza en 2014 de Chicago"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">Xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Proporción de personas en pobreza"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Proporción de personas en pobreza"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-99affdc7935488bc00f0" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-99affdc7935488bc00f0">{"x":{"visdat":{"587832a13980":["function () ","plotlyVisDat"],"58784a1963e0":["function () ","data"]},"cur_data":"58784a1963e0","attrs":{"58784a1963e0":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"type":"box","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Proporción de personas en pobreza en 2014 de Chicago","Xaxis":{"title":"Proporción de personas en pobreza"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Pov14P"},"yaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","x":[0.32058672156459084,0.38621968175498222,0.36453008257963038,0.33678043584394834,0.23231047922270406,0.13009836397198271,0.47651755816948571,0.19932596891967796,0.35908215787198933,0.2574428278204639,0.088341056533827622,0.049788938196774546,0.12011296932107653,0.18913659550349518,0.14574634858056404,0.13804213135068152,0.1095394049195178,0.14447040498442368,0.20952585716273128,0.1884030183924732,0.21956031567080045,0.19058209985428332,0.19299169536155561,0.34194258460974042,0.15714133232130362,0.31787866935443432,0.4765157532433148,0.42385674115731836,0.24621810217490958,0.44465654212166295,0.23474899189819096,0.3288923038926469,0.28991680722719348,0.097770310158485085,0.37314079422382673,0.062384955972339687,0.12543739991696815,0.12140199725866457,0.34798017043592266,0.2632966055948941,0.18003565062388591,0.33530647985989492,0.31932773109243695,0.1517910447761194,0.26304018795039191,0.055866724113169612,0.26140602582496414,0.27116249197174053,0.22460929272505159,0.33210991906644083,0.62767732962447842,0.17070036410366246,0.079267766168724635,0.15159308472638949,0.26992975300249261,0.24524287190710681,0.11570104523926179,0.20539152759948653,0.35292562142410694,0.16003130707018001,0.24209405413437013,0.1000327171601505,0.18768109448277923,0.32856660686053329,0.38614612511671337,0.49617174048430229,0.37900697129288563,0.11920971630452912,0.12621177789717117,0.30507655793829158,0.035996571755070948,0.17998865140911671,0.037424415754208205,0.18092150170648463,0.19735599622285174,0.17461466097402129,0.024470117347402894],"type":"box","orientation":"h","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f229e92830e59c114522" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f229e92830e59c114522">{"x":{"visdat":{"27487cd3515d":["function () ","plotlyVisDat"],"27481de45a4f":["function () ","data"]},"cur_data":"27481de45a4f","attrs":{"27481de45a4f":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"type":"box","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Proporción de personas en pobreza en 2014 de Chicago","xaxis":{"domain":[0,1],"automargin":true,"title":"Proporción de personas en pobreza"},"yaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","x":[0.32058672156459084,0.38621968175498222,0.36453008257963038,0.33678043584394834,0.23231047922270406,0.13009836397198271,0.47651755816948571,0.19932596891967796,0.35908215787198933,0.2574428278204639,0.088341056533827622,0.049788938196774546,0.12011296932107653,0.18913659550349518,0.14574634858056404,0.13804213135068152,0.1095394049195178,0.14447040498442368,0.20952585716273128,0.1884030183924732,0.21956031567080045,0.19058209985428332,0.19299169536155561,0.34194258460974042,0.15714133232130362,0.31787866935443432,0.4765157532433148,0.42385674115731836,0.24621810217490958,0.44465654212166295,0.23474899189819096,0.3288923038926469,0.28991680722719348,0.097770310158485085,0.37314079422382673,0.062384955972339687,0.12543739991696815,0.12140199725866457,0.34798017043592266,0.2632966055948941,0.18003565062388591,0.33530647985989492,0.31932773109243695,0.1517910447761194,0.26304018795039191,0.055866724113169612,0.26140602582496414,0.27116249197174053,0.22460929272505159,0.33210991906644083,0.62767732962447842,0.17070036410366246,0.079267766168724635,0.15159308472638949,0.26992975300249261,0.24524287190710681,0.11570104523926179,0.20539152759948653,0.35292562142410694,0.16003130707018001,0.24209405413437013,0.1000327171601505,0.18768109448277923,0.32856660686053329,0.38614612511671337,0.49617174048430229,0.37900697129288563,0.11920971630452912,0.12621177789717117,0.30507655793829158,0.035996571755070948,0.17998865140911671,0.037424415754208205,0.18092150170648463,0.19735599622285174,0.17461466097402129,0.024470117347402894],"type":"box","orientation":"h","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <table class="caption-top table">
@@ -497,9 +497,9 @@ window.Quarto = {
 <p>De esta forma las variables seleccionadas para el lambda que minimiza son:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Lassonorm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Pov14P <span class="sc">~</span> PopChng <span class="sc">+</span> Under5P <span class="sc">+</span> Under18P <span class="sc">+</span> Over65P <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                  Blk14P <span class="sc">+</span> AS14P <span class="sc">+</span> AI14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Oth14P <span class="sc">+</span> Hisp14P <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                  PropCrRt <span class="sc">+</span> VlntCrRt <span class="sc">+</span> NoHS14 <span class="sc">+</span> ClgGrad14 <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                  HISave <span class="sc">+</span> SESave , <span class="at">data =</span> datosmod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                  Wht14P <span class="sc">+</span> Blk14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Oth14P <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                  PropCrRt <span class="sc">+</span> NoHS14 <span class="sc">+</span> ClgGrad14 <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                  Pov200P , <span class="at">data =</span> datosmod1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="modelo-beta" class="level3">
@@ -514,9 +514,9 @@ window.Quarto = {
 </div>
 <p>De modo que las variables seleccionadas son:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Lassobet <span class="ot">&lt;-</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(Pov14P <span class="sc">~</span> PopChng <span class="sc">+</span> Under18P <span class="sc">+</span> Over65P <span class="sc">+</span> Wht14P <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                               AI14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Oth14P <span class="sc">+</span> VlntCrRt <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                               ClgGrad14 <span class="sc">+</span> HISave <span class="sc">+</span> SESave,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Lassobet <span class="ot">&lt;-</span> betareg<span class="sc">::</span><span class="fu">betareg</span>(Pov14P <span class="sc">~</span> PopChng <span class="sc">+</span> Under5P <span class="sc">+</span> Under18P <span class="sc">+</span> Over21P <span class="sc">+</span> Over65P <span class="sc">+</span> Wht14P <span class="sc">+</span> Blk14P <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                               AI14P <span class="sc">+</span> NHP14P <span class="sc">+</span> Oth14P <span class="sc">+</span> PropCrRt <span class="sc">+</span> ChldPov14 <span class="sc">+</span> NoHS14 <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                               ClgGrad14 <span class="sc">+</span> Unemp14 <span class="sc">+</span> Pov200P,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> datosmod1 , <span class="at">link =</span> <span class="st">"logit"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -524,22 +524,18 @@ window.Quarto = {
 <section id="correlación-y-multicolinealidad" class="level2">
 <h2 class="anchored" data-anchor-id="correlación-y-multicolinealidad">Correlación y multicolinealidad</h2>
 <p>Para cada uno de los conjuntos de variables elegidas se realizará un <em>pairplot</em> y se calculará el <em>Factor de Inflación de Varianza</em> (VIF) para determinar la multicolinealidad, es importante tener en cuenta que se reportaran correlaciones altas <span class="math inline">\((\rho &gt; 0.7)\)</span> y valores graves de multicolinealidad <span class="math inline">\((VIF &gt; 10)\)</span>. El conjunto de variables seleccionado para cada uno de los métodos es:</p>
-<section id="nota-recordemos-que-el-vif_j-frac11---r2_j-por-lo-que-observar-correlaciones-altas-pueden-ser-un-indicio-de-un-vif-alto-esta-condición-no-es-necesaria-ni-suficiente-y-por-tanto-de-multicolinealidad-grave." class="level5">
-<h5 class="anchored" data-anchor-id="nota-recordemos-que-el-vif_j-frac11---r2_j-por-lo-que-observar-correlaciones-altas-pueden-ser-un-indicio-de-un-vif-alto-esta-condición-no-es-necesaria-ni-suficiente-y-por-tanto-de-multicolinealidad-grave.">Nota: Recordemos que el <span class="math inline">\(VIF_j = \frac{1}{1 - R^2_j}\)</span>, por lo que observar correlaciones altas pueden ser un indicio de un VIF alto (esta condición no es necesaria ni suficiente), y por tanto de multicolinealidad grave.</h5>
-</section>
+<p><em><strong>Nota:</strong> Recordemos que el</em> <span class="math inline">\(VIF_j = \frac{1}{1 - R^2_j}\)</span><em>, por lo que observar correlaciones altas pueden ser un indicio de un VIF alto (esta condición no es necesaria ni suficiente), y por tanto de multicolinealidad grave.</em></p>
 <section id="modelo-normal-1" class="level3">
 <h3 class="anchored" data-anchor-id="modelo-normal-1">Modelo Normal</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng , Under5P , Under18P , Over65P ,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                  Blk14P , AS14P , AI14P , NHP14P , Oth14P , Hisp14P ,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                  PropCrRt , VlntCrRt , NoHS14 , ClgGrad14 ,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                  HISave , SESave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                  Wht14P , Blk14P , NHP14P , Oth14P , </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                  PropCrRt , NoHS14 , ClgGrad14 ,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                  Pov200P))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Con respecto al pairplot se considera importante mencionar que algunas parejas de variables con correlaciones altas son:</p>
+<p>Con respecto al pairplot se considera importante mencionar que la única correlación fuerte es:</p>
 <ul>
-<li><p><strong>VlntCrRt - Blk14P:</strong> Con una correlación de <span class="math inline">\(0.848\)</span>.</p></li>
-<li><p><strong>Hisp14P - Oth14P:</strong> Con una correlación de <span class="math inline">\(0.894\)</span>.</p></li>
-<li><p><strong>SESave - HISave:</strong> Con una correlación de <span class="math inline">\(0.713\)</span>.</p></li>
+<li><strong>Wht14P - Blk14P:</strong> Con una correlación de <span class="math inline">\(-0.921\)</span>.</li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -555,24 +551,25 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Lassonorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  PopChng   Under5P  Under18P   Over65P    Blk14P     AS14P     AI14P    NHP14P 
- 1.567719  1.862017  6.659138  2.688322 13.283415  3.493181  1.424189  1.615266 
-   Oth14P   Hisp14P  PropCrRt  VlntCrRt    NoHS14 ClgGrad14    HISave    SESave 
- 5.885807 18.950192  3.898457 14.494171  2.447871  3.398519 19.487018  4.842867 </code></pre>
+<pre><code>  PopChng   Under5P  Under18P   Over65P    Wht14P    Blk14P    NHP14P    Oth14P 
+ 1.145064  1.604762  4.940607  2.550976 21.449779 23.792971  1.520549  4.534839 
+ PropCrRt    NoHS14 ClgGrad14   Pov200P 
+ 2.026783  2.199254  3.052471  4.936709 </code></pre>
 </div>
 </div>
 </section>
 <section id="modelo-beta-1" class="level3">
 <h3 class="anchored" data-anchor-id="modelo-beta-1">Modelo Beta</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng , Under18P , Over65P , Wht14P ,</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                               AI14P , NHP14P , Oth14P , VlntCrRt ,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                               ClgGrad14 , HISave , SESave))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> datosmod1 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(PopChng , Under5P , Under18P , Over21P , Over65P , Wht14P , Blk14P , </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                               AI14P , NHP14P , Oth14P , PropCrRt , ChldPov14 , NoHS14, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                               ClgGrad14 , Unemp14 , Pov200P))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Con respecto al pairplot se considera importante mencionar que las parejas con correlaciones altas son:</p>
+<p>Con respecto al pairplot se considera importante mencionar algunas parejas con correlaciones altas son:</p>
 <ul>
-<li><p><strong>HISave - Under18P:</strong> Con una correlación de <span class="math inline">\(0.791\)</span>.</p></li>
-<li><p><strong>VlntCrRt - Wht14P y VlntCrRt - SESave:</strong> Con una correlación de <span class="math inline">\(-0.821\)</span> y <span class="math inline">\(-0.713\)</span> respectivamente.</p></li>
+<li><p><strong>Over21P - Under18P y Pov200P - Over21P:</strong> Con una correlación de <span class="math inline">\(-0.970\)</span> y <span class="math inline">\(-0.737\)</span>.</p></li>
+<li><p><strong>Wht14P - Blk14P:</strong> Con una correlación de <span class="math inline">\(-0.921\)</span>.</p></li>
+<li><p><strong>Unemp14 - ChldPov14:</strong> Con una correlación de <span class="math inline">\(0.835\)</span>.</p></li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(df2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -584,14 +581,14 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Evaluando el VIF se observa que no se tiene multicolinealidad grave, pero si moderada.</p>
+<p>Evaluando el VIF se rectifica que si hay multicolinealidad grave, por lo que antes de evaluar supuestos en el modelo se debe corregir este problema.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Lassobet)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  PopChng  Under18P   Over65P    Wht14P     AI14P    NHP14P    Oth14P  VlntCrRt 
- 1.630537  4.908402  2.575745  4.066680  1.187699  1.342971  2.845145  5.198865 
-ClgGrad14    HISave    SESave 
- 3.304538  8.477677  4.426831 </code></pre>
+<pre><code>  PopChng   Under5P  Under18P   Over21P   Over65P    Wht14P    Blk14P     AI14P 
+ 1.283819  1.843576 25.102410 31.907906  3.513455 18.890836 25.696617  1.396511 
+   NHP14P    Oth14P  PropCrRt ChldPov14    NoHS14 ClgGrad14   Unemp14   Pov200P 
+ 1.614650  4.960458  2.268921 12.374672 10.127573  4.137886  6.576293  5.773048 </code></pre>
 </div>
 </div>
 </section>
